@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from './context/usercontext/AuthProvider';
+import authreducer, { authinitialState } from './context/usercontext/authreducer';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider reducer={authreducer} initialState={authinitialState}>
+      <App />
+    </AuthProvider>
+ 
   </React.StrictMode>,
   document.getElementById('root')
 );

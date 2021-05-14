@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Container } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Logo from '../../trouve-logo.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,7 @@ const navStyles={
     display:'flex',
     alignItems:'center',
     margin:'0 0px',
-    padding:'20px 0',
+    padding:'0px 0',
     justifyContent:'space-between'
 }
 
@@ -58,7 +59,8 @@ export default function NavBar() {
     <div className={classes.root}>
       <nav style={navStyles}>
         <div style={navLeftStyles}>
-            <Typography className={classes.link}>Made with ❤ by FuzzySid</Typography>
+            <img src={Logo} style={{height:100,width:100}}/>
+            {/* <Typography className={classes.link}>Made with ❤ by FuzzySid</Typography> */}
             {/* <Typography className={classes.link}>Help</Typography>
             <Typography className={classes.link}>Features</Typography> */}
         </div>

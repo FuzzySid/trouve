@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import React from 'react';
 import Hero from '../../components/landing/Hero';
 import NavBar from '../../components/landing/Navbar';
@@ -8,6 +8,7 @@ const LandingPage=()=>{
         <Container>
             <NavBar/>
             <Hero/>
+            <Typography align="center">Made with ❤ by FuzzySid</Typography>
         </Container>
     )
 }

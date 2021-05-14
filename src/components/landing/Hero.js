@@ -18,7 +18,7 @@ const Hero=()=>{
                 <br/>
                 <br/>
                 <Typography>
-                   Fuzzy brings you a simple tool to help manage your life. Organize all your lists at one places and collaborate with others to get things done on time.
+                   Trouve brings you a simple tool to help manage your life. Organize all your lists at one place and collaborate with others to get things done on time.
                 </Typography>
                 <br/>
                 <br/>
