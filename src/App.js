@@ -5,6 +5,8 @@ import Create from './pages/Create/Create';
 import {createMuiTheme,ThemeProvider} from '@material-ui/core';
 import colors from './constants/colors';
 import LandingPage from './pages/LandingPage/Landing';
+import { useStateValue } from './context/usercontext/AuthProvider';
+import NotFound from './pages/404/404';
 
 const theme=createMuiTheme({
   palette:colors,
@@ -18,16 +20,19 @@ const theme=createMuiTheme({
 })
 
 function App() {
+  const [{user},dispatch]=useStateValue()
+  console.log(user)
   return (
    <ThemeProvider theme={theme}>
       <Router>
           <Switch>
             <Route exact path="/">
-              <LandingPage/>
-              {/* <Notes/> */}
+              {
+                user? <Notes/>  : <LandingPage/>
+              }              
             </Route>
             <Route path="/create">
-              <Create/>
+              {user ? <Create/> : <NotFound/> }
             </Route>
           </Switch>
         </Router>

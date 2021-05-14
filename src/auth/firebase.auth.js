@@ -1,16 +1,17 @@
-import {auth} from '../firebase.config';
+import { authactionTypes } from '../context/usercontext/authreducer';
+import {auth, provider} from '../firebase.config';
 
 export const authenticateWithGoogle=(dispatch)=>{
     auth.signInWithPopup(provider)
             .then(result=>{
                 console.log(result)
                 dispatch({
-                    type: actionTypes.SET_USER,
+                    type: authactionTypes.SET_USER,
                     user: result.user
                 })
                 
             })
             .catch(err=>{
-                alert(err.message)
+                console.log(err.message)
             })
 }

@@ -9,6 +9,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Container } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Logo from '../../trouve-logo.png';
+import { useStateValue } from '../../context/usercontext/AuthProvider';
+import { authenticateWithGoogle } from '../../auth/firebase.auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +56,7 @@ const GoogleIcon=()=><img src="https://img.icons8.com/fluent/48/000000/google-lo
 
 export default function NavBar() {
   const classes = useStyles();
-
+  const [,dispatch]=useStateValue()
   return (
     <div className={classes.root}>
       <nav style={navStyles}>
@@ -72,6 +74,7 @@ export default function NavBar() {
                 className={classes.btn} 
                 variant="contained" 
                 color="primary"
+                onClick={()=>authenticateWithGoogle(dispatch)}
             >
                 Get Started
             </Button>
