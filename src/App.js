@@ -4,6 +4,7 @@ import Notes from './pages/Notes/Notes';
 import Create from './pages/Create/Create';
 import {createMuiTheme,ThemeProvider} from '@material-ui/core';
 import colors from './constants/colors';
+import LandingPage from './pages/LandingPage/Landing';
 
 const theme=createMuiTheme({
   palette:colors,
@@ -22,7 +23,8 @@ function App() {
       <Router>
           <Switch>
             <Route exact path="/">
-              <Notes/>
+              <LandingPage/>
+              {/* <Notes/> */}
             </Route>
             <Route path="/create">
               <Create/>
