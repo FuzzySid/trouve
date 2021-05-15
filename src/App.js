@@ -7,6 +7,7 @@ import colors from './constants/colors';
 import LandingPage from './pages/LandingPage/Landing';
 import { useStateValue } from './context/usercontext/AuthProvider';
 import NotFound from './pages/404/404';
+import Layout from './components/layout/Layout';
 
 const theme=createMuiTheme({
   palette:colors,
@@ -26,13 +27,14 @@ function App() {
    <ThemeProvider theme={theme}>
       <Router>
           <Switch>
+            
             <Route exact path="/">
               {
-                user? <Notes/>  : <LandingPage/>
+                user? <Layout><Notes/></Layout>  : <LandingPage/>
               }              
             </Route>
             <Route path="/create">
-              {user ? <Create/> : <NotFound/> }
+              {user ? <Layout><Create/></Layout> : <NotFound/> }
             </Route>
           </Switch>
         </Router>
