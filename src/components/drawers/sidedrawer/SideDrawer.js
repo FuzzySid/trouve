@@ -5,8 +5,14 @@ import { useHistory, useLocation } from 'react-router';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useStateValue } from '../../../context/usercontext/AuthProvider';
 import { logout } from '../../../auth/firebase.auth';
+import { blue, green, orange } from '@material-ui/core/colors';
 
 const drawerWidth=240;
+const avatar={
+    height:25,
+    width:25,
+    fontSize:12
+}
 const useStyles=makeStyles((theme)=>{
     return{
         drawer:{
@@ -24,9 +30,17 @@ const useStyles=makeStyles((theme)=>{
         list:{
             flexGrow:1
         },
-        avatar:{
-            height:25,
-            width:25,
+        wanderlist:{
+            backgroundColor:green[500],
+           ...avatar
+        },
+        watchlist:{
+            backgroundColor:orange[500],
+            ...avatar
+        },
+        todos:{
+            backgroundColor:blue[500],
+            ...avatar
         }
 
     }
@@ -54,15 +68,15 @@ const SideDrawer=()=>{
     const drawerCategory=[
         {
             text:'Wanderlist',
-            icon: <Avatar className={classes.avatar} />
+            icon: <Avatar className={classes.avatar,classes.wanderlist}>{'W'}</Avatar>
         },
         {
             text:'Watchlist',
-            icon: <Avatar className={classes.avatar}/>
+            icon: <Avatar className={classes.avatar,classes.watchlist}>{'W'}</Avatar>
         },
         {
             text:'Todos',
-            icon: <Avatar className={classes.avatar}/>
+            icon: <Avatar className={classes.avatar,classes.todos}>{'T'}</Avatar>
         }
     ]
 

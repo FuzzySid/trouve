@@ -1,12 +1,16 @@
 import { Avatar, Card, CardContent, CardHeader, IconButton, makeStyles, Typography } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
+import { blue, green, orange, yellow } from '@material-ui/core/colors';
 import { DeleteOutlined, MoreVertOutlined } from '@material-ui/icons';
 import React from 'react';
 
 const useStyles=makeStyles({
     avatar:{
         backgroundColor: (item)=>{
-            return blue[500]
+            if(item.category==='Watchlist')
+            return yellow[500];
+            else if(item.category==='Wanderlist')
+            return green[500];
+            else return blue[500]
         }
     }
 })
