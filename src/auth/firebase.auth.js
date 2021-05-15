@@ -15,3 +15,16 @@ export const authenticateWithGoogle=(dispatch)=>{
                 console.log(err.message)
             })
 }
+
+export const logout=(dispatch)=>{
+    auth.signOut()
+        .then(()=>{
+            console.log('signout successful')
+            dispatch({
+                type:authactionTypes.LOG_OUT,
+            })
+        })
+        .catch(err=>{
+            console.log('error with signout')
+        })
+}

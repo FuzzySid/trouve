@@ -1,6 +1,6 @@
 import './App.css';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-import Notes from './pages/Notes/Notes';
+import Items from './pages/Items/Items';
 import Create from './pages/Create/Create';
 import {createMuiTheme,ThemeProvider} from '@material-ui/core';
 import colors from './constants/colors';
@@ -30,7 +30,7 @@ function App() {
             
             <Route exact path="/">
               {
-                user? <Layout><Notes/></Layout>  : <LandingPage/>
+                user? <Layout><Items/></Layout>  : <LandingPage/>
               }              
             </Route>
             <Route path="/create">

@@ -18,21 +18,23 @@ export default function ItemCard({item,handleDelete=()=>{}}){
             <Card elevation={1}>
                 <CardHeader
                     avatar={
-                        <Avatar className={classes.avatar}>C</Avatar>
+                        <Avatar className={classes.avatar}>
+                            {item.category[0].toUpperCase()}
+                        </Avatar>
                     }
                     action={
                         <IconButton onClick={()=>handleDelete(item)}>
                             <DeleteOutlined/>
                         </IconButton>
                     }
-                    title={'Item title'}
-                    subheader={'Item category'}
+                    title={item.title}
+                    subheader={item.category}
                 />
                 <CardContent>
                     <Typography 
                         color="textSecondary"
                         variant="body2">
-                        Details
+                        {item.details}
                     </Typography>
                 </CardContent>
             </Card>

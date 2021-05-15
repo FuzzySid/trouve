@@ -3,11 +3,14 @@ import Container from '@material-ui/core/Container'
 import useCreateStyles from './CreateStyles';
 import constants from '../../constants/constants';
 import CreateForm from '../../components/form/CreateForm';
+import { useStateValue } from '../../context/usercontext/AuthProvider';
+import { addItem } from '../../api/firebase.db';
 
 
 
 const Create=()=>{
     const classes=useCreateStyles();
+    const [{user}]=useStateValue()
 
     const [item,setItem]=useState({
         title:'',
@@ -27,7 +30,12 @@ const Create=()=>{
         setError(constants.initErrorState)
         console.log(item,category,error,deadline)
         if(item.title && item.details){
-            console.log(item.title,item.details,category,deadline)
+            //console.log(item.title,item.details,category,deadline)
+            addItem(user.uid,{
+                ...item,
+                category,
+                deadline
+            })
         }
         else{
             setError({

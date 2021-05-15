@@ -1,10 +1,12 @@
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Button, Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from '@material-ui/core';
 import { AddCircleOutline, SubjectOutlined } from '@material-ui/icons';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { useStateValue } from '../../../context/usercontext/AuthProvider';
+import { logout } from '../../../auth/firebase.auth';
 
 const drawerWidth=240;
-
 const useStyles=makeStyles((theme)=>{
     return{
         drawer:{
@@ -18,6 +20,13 @@ const useStyles=makeStyles((theme)=>{
         },
         title:{
             padding:theme.spacing(2)
+        },
+        list:{
+            flexGrow:1
+        },
+        avatar:{
+            height:25,
+            width:25,
         }
 
     }
@@ -28,6 +37,7 @@ const SideDrawer=()=>{
     const classes=useStyles()
     const history=useHistory()
     const location=useLocation()
+    const [,dispatch]=useStateValue()
     const drawerItems=[
         {
             text:'Home',
@@ -40,6 +50,20 @@ const SideDrawer=()=>{
             path:'/create'
         },
        
+    ]
+    const drawerCategory=[
+        {
+            text:'Wanderlist',
+            icon: <Avatar className={classes.avatar} />
+        },
+        {
+            text:'Watchlist',
+            icon: <Avatar className={classes.avatar}/>
+        },
+        {
+            text:'Todos',
+            icon: <Avatar className={classes.avatar}/>
+        }
     ]
 
     return(
@@ -54,7 +78,7 @@ const SideDrawer=()=>{
                     Trouve
                 </Typography>
             </div>
-            <List>
+            <List className={classes.list}>
                 {drawerItems.map(draweritem=>(
                     <ListItem 
                         key={draweritem.text} 
@@ -66,7 +90,25 @@ const SideDrawer=()=>{
                         <ListItemText primary={draweritem.text}/>
                     </ListItem>
                 ))}
+                <Typography className={classes.title}>Categories</Typography>
+                {drawerCategory.map(category=>(
+                    <ListItem 
+                        key={category.text} 
+                        button
+                        onClick={()=>history.push(category.path)}
+                        className={location.pathname==category.path ? classes.active : null}
+                    > 
+                        <ListItemIcon>{category.icon}</ListItemIcon>
+                        <ListItemText primary={category.text}/>
+                    </ListItem>
+                ))}
             </List>
+            <Button
+                endIcon={<ExitToAppIcon/>}
+                onClick={()=>logout(dispatch)}
+            >
+                Logout
+            </Button>
         </Drawer>
     )
 }
