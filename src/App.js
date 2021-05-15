@@ -8,6 +8,7 @@ import LandingPage from './pages/LandingPage/Landing';
 import { useStateValue } from './context/usercontext/AuthProvider';
 import NotFound from './pages/404/404';
 import Layout from './components/layout/Layout';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 const theme=createMuiTheme({
   palette:colors,
@@ -25,6 +26,7 @@ function App() {
   console.log(user)
   return (
    <ThemeProvider theme={theme}>
+     <SnackbarProvider maxSnack={3} anchorOrigin={{horizontal:'right',vertical:'bottom'}} >
       <Router>
           <Switch>
             
@@ -38,6 +40,8 @@ function App() {
             </Route>
           </Switch>
         </Router>
+     </SnackbarProvider>
+
    </ThemeProvider>
    
   );

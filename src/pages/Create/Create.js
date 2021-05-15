@@ -1,14 +1,17 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import Container from '@material-ui/core/Container'
 import useCreateStyles from './CreateStyles';
 import constants from '../../constants/constants';
 import CreateForm from '../../components/form/CreateForm';
 import { useStateValue } from '../../context/usercontext/AuthProvider';
 import { addItem } from '../../api/firebase.db';
-
+import {useSnackbar} from 'notistack';
+import { useHistory } from 'react-router';
 
 
 const Create=()=>{
+    const { enqueueSnackbar }=useSnackbar()
+    const history=useHistory();
     const classes=useCreateStyles();
     const [{user}]=useStateValue()
 
@@ -16,26 +19,40 @@ const Create=()=>{
         title:'',
         details:''
     })
+
     const [error,setError]=useState(constants.initErrorState)
     const [category,setCategory]=useState('Wanderlist')
     const [deadline,setDeadline]=useState(new Date())
+    const [status,setStatus]=useState()
 
     const handleChange=(e,type)=>{
         setItem({...item,[type]:e.target.value})
     }
 
     const handleCategoryChange=(e)=>setCategory(e.target.value)
-    const handleSubmit=(e)=>{
+    const handleSubmit=async(e)=>{
+        if(status) return;
         e.preventDefault()
         setError(constants.initErrorState)
         console.log(item,category,error,deadline)
         if(item.title && item.details){
             //console.log(item.title,item.details,category,deadline)
-            addItem(user.uid,{
+            setStatus('loading')
+            const response=await addItem(user.uid,{
                 ...item,
                 category,
                 deadline
             })
+            if(response.error) setStatus('error')
+            else{
+                 setStatus('success');
+                 enqueueSnackbar('New item added!', { variant:'success' });
+                 //history.push('/')
+                 setItem({title:'',details:''});
+                 setCategory('Wanderlist');
+                 setDeadline(new Date())
+            }
+
         }
         else{
             setError({
@@ -45,6 +62,9 @@ const Create=()=>{
         }
     }
 
+    useEffect(()=>{
+        if(status) setTimeout(()=>setStatus(),3000);
+    },[status])
 
     return(
         <Container>
@@ -58,6 +78,7 @@ const Create=()=>{
                 category={category}
                 deadline={deadline}
                 setDeadline={setDeadline}
+                status={status}
             />          
         </Container>
     )

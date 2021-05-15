@@ -15,7 +15,7 @@ const useStyles=makeStyles({
     }
 })
 
-export default function ItemCard({item,handleDelete=()=>{}}){
+export default function ItemCard({item,handleDelete}){
     const classes=useStyles(item)
     return(
         <div>
