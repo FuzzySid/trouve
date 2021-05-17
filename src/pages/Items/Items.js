@@ -7,11 +7,13 @@ import { deleteItem, getAllItems } from '../../api/firebase.db';
 import Masonry from 'react-masonry-css';
 import Toast from '../../components/snackbars/Toast';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import Layout from '../../components/layout/Layout';
 
 const Items=()=>{
     const { enqueueSnackbar } = useSnackbar();
     const [{user}]=useStateValue();
-    const [items,setItems]=useState([])
+    const [items,setItems]=useState([]);
+
     const [status,setStatus]=useState({type:null,show:false,msg:''})
 
     const handleDelete=async(item)=>{
@@ -31,21 +33,24 @@ const Items=()=>{
     }
 
     return(
-        <Container>
-            <div style={{height:80}}></div>
-            <Masonry
-                breakpointCols={breakpoints}
-                className="my-masonry-grid"
-                columnClassName="my-masonry-grid_column"
-            >
-                {
-                    items.map(item=>                
-                    <div key={item.id} >
-                        <ItemCard item={item} handleDelete={handleDelete} />
-                    </div>)
-                }
-            </Masonry>
-        </Container>
+        <Layout items={items} setItems={setItems}>
+            <Container>
+                <div style={{height:80}}></div>
+                <Masonry
+                    breakpointCols={breakpoints}
+                    className="my-masonry-grid"
+                    columnClassName="my-masonry-grid_column"
+                >
+                    {
+                        items.map(item=>                
+                        <div key={item.id} >
+                            <ItemCard item={item} handleDelete={handleDelete} />
+                        </div>)
+                    }
+                </Masonry>
+            </Container>
+        </Layout>
+
     )
 }
 

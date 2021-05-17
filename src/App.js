@@ -26,7 +26,6 @@ function App() {
   const [{user},dispatch]=useStateValue()
   const [items,setItems]=useState([])
 
-  console.log(user)
   return (
    <ThemeProvider theme={theme}>
      <SnackbarProvider maxSnack={3} anchorOrigin={{horizontal:'right',vertical:'bottom'}} >
@@ -35,11 +34,11 @@ function App() {
             
             <Route exact path="/">
               {
-                user? <Layout><Items/></Layout>  : <LandingPage/>
+                user? <Items/>  : <LandingPage/>
               }              
             </Route>
             <Route path="/create">
-              {user ? <Layout><Create/></Layout> : <NotFound/> }
+              {user ? <Create/> : <NotFound/> }
             </Route>
           </Switch>
         </Router>

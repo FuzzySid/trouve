@@ -7,6 +7,7 @@ import { useStateValue } from '../../context/usercontext/AuthProvider';
 import { addItem } from '../../api/firebase.db';
 import {useSnackbar} from 'notistack';
 import { useHistory } from 'react-router';
+import Layout from '../../components/layout/Layout';
 
 
 const Create=()=>{
@@ -67,20 +68,23 @@ const Create=()=>{
     },[status])
 
     return(
-        <Container>
-            <CreateForm
-                item={item}
-                classes={classes}
-                handleInputChange={handleChange}
-                error={error}
-                handleSubmit={handleSubmit}
-                handleCategoryChange={handleCategoryChange}
-                category={category}
-                deadline={deadline}
-                setDeadline={setDeadline}
-                status={status}
-            />          
-        </Container>
+        <Layout>
+            <Container>
+                <CreateForm
+                    item={item}
+                    classes={classes}
+                    handleInputChange={handleChange}
+                    error={error}
+                    handleSubmit={handleSubmit}
+                    handleCategoryChange={handleCategoryChange}
+                    category={category}
+                    deadline={deadline}
+                    setDeadline={setDeadline}
+                    status={status}
+                />          
+            </Container>
+        </Layout>
+
     )
 }
 
