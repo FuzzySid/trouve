@@ -38,7 +38,7 @@ function App() {
               }              
             </Route>
             <Route path="/create">
-              {user ? <Create/> : <NotFound/> }
+              {user ? <Layout><Create/></Layout> : <NotFound/> }
             </Route>
           </Switch>
         </Router>

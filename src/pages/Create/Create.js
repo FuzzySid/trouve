@@ -68,7 +68,6 @@ const Create=()=>{
     },[status])
 
     return(
-        <Layout>
             <Container>
                 <CreateForm
                     item={item}
@@ -83,8 +82,6 @@ const Create=()=>{
                     status={status}
                 />          
             </Container>
-        </Layout>
-
     )
 }
 

@@ -28,7 +28,7 @@ export default function ItemCard({item,handleDelete}){
                     action={
                         <>
                         <Tooltip title="Edit">
-                            <IconButton size="small" onClick={()=>{}}>
+                            <IconButton onClick={()=>{}}>
                                 <EditIcon fontSize="small"/>
                             </IconButton>
                         </Tooltip>
