@@ -4,6 +4,7 @@ import {FormControlLabel, FormLabel} from '@material-ui/core';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControl from '@material-ui/core/FormControl';
+import constants from '../../../constants/constants';
 
 export default function CategorySelector({category,handleCategoryChange,classes}){
     return(
@@ -11,9 +12,11 @@ export default function CategorySelector({category,handleCategoryChange,classes}
             <Typography>Category</Typography>
             <FormControl className={classes.field}>
                 <RadioGroup onChange={handleCategoryChange} value={category}>
-                    <FormControlLabel fullWidth={false} control={<Radio className={classes.places} /> } label="Wanderlist" value="Wanderlist"></FormControlLabel>
-                    <FormControlLabel control={<Radio className={classes.watchlist} /> } label="Watchlist" value="Watchlist"></FormControlLabel>
-                    <FormControlLabel control={<Radio className={classes.todos}/> } label="Todos" value="Todos"></FormControlLabel>
+                    {
+                        Object.keys(constants.categories).map(category=>
+                            <FormControlLabel control={<Radio className={classes.places} /> } label={category} value={category}></FormControlLabel>
+                        )
+                    }
                 </RadioGroup>
             </FormControl>
         </>

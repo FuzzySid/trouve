@@ -3,12 +3,15 @@ export const landingStyles={
         fontWeight:'600'
     },
     container:{
-        padding:'50px 100px'
+        padding:'50px 0px'
     },
     flexRow:{
         display:'flex',
         flexDirection:'row',
         alignItems:'center'
+    },
+    justifyBetween:{
+        justifyContent:'space-between'
     },
     flexColumn:{
         display:'flex',

@@ -1,9 +1,15 @@
 import { Container, Typography } from '@material-ui/core';
-import React from 'react';
+import React,{useEffect} from 'react';
+import { authenticateWithGoogle } from '../../auth/firebase.auth';
 import Hero from '../../components/landing/Hero';
 import NavBar from '../../components/landing/Navbar';
+import { useStateValue } from '../../context/usercontext/AuthProvider';
 
 const LandingPage=()=>{
+    const [,dispatch]=useStateValue()
+    // useEffect(()=>{
+    //     authenticateWithGoogle(dispatch)
+    // },[])
     return(
         <Container>
             <NavBar/>

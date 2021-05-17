@@ -1,14 +1,43 @@
 import React from 'react';
 import { landingStyles } from './styles';
 import HeroImage from '../../hero.png';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 
 const GoogleIcon=()=><img src="https://img.icons8.com/fluent/48/000000/google-logo.png" style={{height:20,width:20}}/>
 
 const Hero=()=>{
     return(
         <div style={{...landingStyles.flexRow,...landingStyles.container}}>
-            <div style={{...landingStyles.flexColumn,flex:'0.4',padding:'20px'}}>
+            <Grid container justify="center" spacing={3}>
+                <Grid item sm={12} md={4}>
+                    <Typography variant="h3" style={landingStyles.bold}>
+                        Save Time, 
+                    </Typography>
+                    <Typography variant="h3" style={landingStyles.bold}>
+                        Fuel Productivity. 
+                    </Typography>
+                    <br/>
+                    <br/>
+                    <Typography>
+                    Trouve brings you a simple tool to help manage your life. Organize all your lists at one place and collaborate with others to get things done on time.
+                    </Typography>
+                    <br/>
+                    <br/>
+                    <Button 
+                        //startIcon={<GoogleIcon/>}
+                        disableElevation 
+                        variant="contained" 
+                        style={landingStyles.getStartedBtn} 
+                        fullWidth={false}
+                    >
+                        Get Started
+                    </Button>
+                </Grid>
+                <Grid item sm={12} md={5}>
+                    <img src={HeroImage} style={landingStyles.heroImage} />
+                </Grid>
+            </Grid>
+            {/* <div style={{...landingStyles.flexColumn,flex:'0.4',padding:'20px'}}>
                 <Typography variant="h3" style={landingStyles.bold}>
                     Save Time, 
                 </Typography>
@@ -34,7 +63,7 @@ const Hero=()=>{
             </div>
             <div style={{flex:'0.6'}}>
                 <img src={HeroImage} style={landingStyles.heroImage} />
-            </div>
+            </div> */}
         </div>
     )
 }

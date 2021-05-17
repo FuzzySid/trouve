@@ -1,4 +1,5 @@
 import './App.css';
+import {useState} from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Items from './pages/Items/Items';
 import Create from './pages/Create/Create';
@@ -23,6 +24,8 @@ const theme=createMuiTheme({
 
 function App() {
   const [{user},dispatch]=useStateValue()
+  const [items,setItems]=useState([])
+
   console.log(user)
   return (
    <ThemeProvider theme={theme}>

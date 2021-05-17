@@ -48,6 +48,15 @@ export const getAllItems=async(userid)=>{
     return await data;
 }
 
+export const getItemByQuery=async(userid,queryType,query)=>{
+    if(queryType!=='filter') return;
+    const collectionRef=await db.collection(userid);
+    const queryRef=await collectionRef.where('Category'===query);
+    console.log(queryRef)
+}
+
+
+
 export const deleteItem=async(userid,itemId,itemCategory)=>{
     const collectionRef=await db.collection(userid);
     const response=await collectionRef.doc(itemId).delete()

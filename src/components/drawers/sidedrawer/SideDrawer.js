@@ -10,6 +10,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import constants from '../../../constants/constants';
+
 
 const drawerWidth=240;
 const avatar={
@@ -35,15 +37,15 @@ const useStyles=makeStyles((theme)=>{
             flexGrow:1
         },
         wanderlist:{
-            backgroundColor:green[500],
+            backgroundColor:constants.categories['Eating Places'].color,
            ...avatar
         },
         watchlist:{
-            backgroundColor:orange[500],
+            backgroundColor:constants.categories['Watchlist'].color,
             ...avatar
         },
         todos:{
-            backgroundColor:blue[500],
+            backgroundColor:constants.categories['Todos'].color,
             ...avatar
         }
 
@@ -73,16 +75,16 @@ const SideDrawer=()=>{
     ]
     const drawerCategory=[
         {
-            text:'Wanderlist',
-            icon: <Avatar className={classes.avatar,classes.wanderlist}>{'W'}</Avatar>
+            text:'Eating Places',
+            icon: <Avatar className={classes.avatar,classes.wanderlist}>{constants.categories['Eating Places'].icon}</Avatar>
         },
         {
             text:'Watchlist',
-            icon: <Avatar className={classes.avatar,classes.watchlist}>{'W'}</Avatar>
+            icon: <Avatar className={classes.avatar,classes.watchlist}>{constants.categories['Watchlist'].icon}</Avatar>
         },
         {
             text:'Todos',
-            icon: <Avatar className={classes.avatar,classes.todos}>{'T'}</Avatar>
+            icon: <Avatar className={classes.avatar,classes.todos}>{constants.categories['Todos'].icon}</Avatar>
         }
     ]
 

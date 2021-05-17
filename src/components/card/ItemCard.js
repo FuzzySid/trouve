@@ -1,16 +1,15 @@
 import { Avatar, Card, CardContent, CardHeader, IconButton, makeStyles, Typography } from '@material-ui/core';
 import { blue, green, orange, yellow } from '@material-ui/core/colors';
+import EditIcon from '@material-ui/icons/Edit';
 import { DeleteOutlined, MoreVertOutlined } from '@material-ui/icons';
+import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
+import constants from '../../constants/constants';
 
 const useStyles=makeStyles({
     avatar:{
-        backgroundColor: (item)=>{
-            if(item.category==='Watchlist')
-            return yellow[500];
-            else if(item.category==='Wanderlist')
-            return green[500];
-            else return blue[500]
+        backgroundColor: ({category})=>{
+            return constants.categories[category].color
         }
     }
 })
@@ -23,13 +22,23 @@ export default function ItemCard({item,handleDelete}){
                 <CardHeader
                     avatar={
                         <Avatar className={classes.avatar}>
-                            {item.category[0].toUpperCase()}
+                            {constants.categories[item.category].icon}
                         </Avatar>
                     }
                     action={
-                        <IconButton onClick={()=>handleDelete(item)}>
-                            <DeleteOutlined/>
-                        </IconButton>
+                        <>
+                        <Tooltip title="Edit">
+                            <IconButton size="small" onClick={()=>{}}>
+                                <EditIcon fontSize="small"/>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Delete">
+                            <IconButton onClick={()=>handleDelete(item)}>
+                                <DeleteOutlined fontSize="small"/>
+                            </IconButton>
+                        </Tooltip>
+
+                        </>
                     }
                     title={item.title}
                     subheader={item.category}

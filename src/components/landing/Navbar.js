@@ -8,14 +8,21 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Container } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Logo from '../../trouve-logo.png';
 import { useStateValue } from '../../context/usercontext/AuthProvider';
-import { authenticateWithGoogle } from '../../auth/firebase.auth';
+import { authenticateWithGoogle, googleAuthPopup, googleRedirect } from '../../auth/firebase.auth';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme,matches) => ({
   root: {
     // flexGrow: 1,
-    padding:'0 100px'
+    [theme.breakpoints.down('sm')]: {
+      padding:`0px ${theme.spacing(0)}px`,
+    },
+    [theme.breakpoints.up('md')]: {
+      padding:`0px ${theme.spacing(17)}px`,
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -55,7 +62,9 @@ const navLeftStyles={
 const GoogleIcon=()=><img src="https://img.icons8.com/fluent/48/000000/google-logo.png" style={{height:20,width:20}}/>
 
 export default function NavBar() {
-  const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'))
+  const classes = useStyles(theme,matches);
   const [,dispatch]=useStateValue()
   return (
     <div className={classes.root}>
@@ -74,7 +83,8 @@ export default function NavBar() {
                 className={classes.btn} 
                 variant="contained" 
                 color="primary"
-                onClick={()=>authenticateWithGoogle(dispatch)}
+                onClick={()=>googleAuthPopup(dispatch)}
+                //onClick={()=>googleRedirect()}
             >
                 Get Started
             </Button>

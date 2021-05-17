@@ -7,8 +7,6 @@ import { deleteItem, getAllItems } from '../../api/firebase.db';
 import Masonry from 'react-masonry-css';
 import Toast from '../../components/snackbars/Toast';
 import { SnackbarProvider, useSnackbar } from 'notistack';
-import FloatingActionButton from '../../components/buttons/FloatingActionButton/FloatingActionButton';
-
 
 const Items=()=>{
     const { enqueueSnackbar } = useSnackbar();
@@ -34,6 +32,7 @@ const Items=()=>{
 
     return(
         <Container>
+            <div style={{height:80}}></div>
             <Masonry
                 breakpointCols={breakpoints}
                 className="my-masonry-grid"
