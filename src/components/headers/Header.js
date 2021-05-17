@@ -2,11 +2,13 @@ import { AppBar, Avatar, makeStyles, Toolbar, Typography } from '@material-ui/co
 import React from 'react';
 import {format} from 'date-fns';
 import { useStateValue } from '../../context/usercontext/AuthProvider';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-const useStyles=makeStyles((theme)=>{
+const useStyles=makeStyles((theme,matches)=>{
     return{
         appbar:{
-            width: 'calc(100% - 240px)'
+            //width: matches ? 'calc(100% - 240px)' : '100%'
         },
         date:{
             flexGrow:1
@@ -19,10 +21,13 @@ const useStyles=makeStyles((theme)=>{
 })
 
 const Header=()=>{
-    const classes=useStyles();
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up('sm'));
+    const classes=useStyles(theme,matches);
+    console.log({matches})
     const [{user}]=useStateValue()
     return(
-        <AppBar elevation={0} className={classes.appbar}>
+        <AppBar elevation={0} className={classes.appbar} style={{width: matches ? 'calc(100% - 240px)' : '100%'}}>
             <Toolbar>
                 <Typography className={classes.date}>
                     {format(new Date(),'do MMMM Y')}

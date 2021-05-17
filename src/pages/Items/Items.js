@@ -7,6 +7,7 @@ import { deleteItem, getAllItems } from '../../api/firebase.db';
 import Masonry from 'react-masonry-css';
 import Toast from '../../components/snackbars/Toast';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import FloatingActionButton from '../../components/buttons/FloatingActionButton/FloatingActionButton';
 
 
 const Items=()=>{
@@ -19,8 +20,6 @@ const Items=()=>{
         const response=await deleteItem(user.uid,item.id,item.category)
         setItems(items.filter(_item=>_item.id!==item.id))
         enqueueSnackbar('This item has been deleted successfully!', { variant:'success' });
-        // setStatus({type:'success',show:true,msg:'This item has been deleted successfully'})
-        // setTimeout(()=>setStatus({type:null,show:false}),3000)
     }
 
     useEffect(async()=>{
@@ -47,7 +46,6 @@ const Items=()=>{
                     </div>)
                 }
             </Masonry>
-            {/* <Toast show={status.show} message={status.msg} type={status.type}/> */}
         </Container>
     )
 }

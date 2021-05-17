@@ -1,7 +1,10 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
+import FloatingActionButton from '../buttons/FloatingActionButton/FloatingActionButton';
 import SideDrawer from '../drawers/sidedrawer/SideDrawer';
 import Header from '../headers/Header';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles=makeStyles((theme)=>{
     return{
@@ -11,6 +14,7 @@ const useStyles=makeStyles((theme)=>{
         authenticatedPage:{
             background:'#f9f9f9',
             width:'100%',
+            minHeight:'100vh',
             padding:theme.spacing(3)
         },
         toolbar:theme.mixins.toolbar
@@ -19,8 +23,12 @@ const useStyles=makeStyles((theme)=>{
 
 export default function Layout({children}){
     const classes=useStyles()
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up('sm'))
+    console.log({matches})
     return(
         <div className={classes.root}>
+            {!matches && <FloatingActionButton/>} 
             <Header/>
             <SideDrawer/>
             <div className={classes.authenticatedPage}>
