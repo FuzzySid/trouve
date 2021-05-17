@@ -12,7 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { landingStyles } from '../landing/styles';
 import { grey } from '@material-ui/core/colors';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -58,10 +58,17 @@ const useStyles=makeStyles((theme,matches)=>{
 const Header=()=>{
     const theme = useTheme();
     const location=useLocation();
+    const history=useHistory()
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
     const classes=useStyles(theme,matches);
     console.log({matches})
     const [{user},dispatch]=useStateValue()
+
+    const handleLogout=()=>{
+        logout(dispatch);
+        history.push('/')
+    }
+    
     return(
         <AppBar elevation={0} className={classes.appbar} style={{width: matches ? 'calc(100% - 240px)' : '100%'}}>
             <Toolbar>
@@ -74,7 +81,7 @@ const Header=()=>{
                 <Avatar 
                     className={classes.avatar} 
                     src={user?.photoURL} />
-                {!matches &&  <IconButton onClick={()=>logout(dispatch)}><ExitToAppOutlined/> </IconButton>}
+                {!matches &&  <IconButton onClick={handleLogout}><ExitToAppOutlined/> </IconButton>}
             </Toolbar>
             {
                 location.pathname==='/' && 

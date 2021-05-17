@@ -1,5 +1,5 @@
 import { Avatar, Button, Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from '@material-ui/core';
-import { AddCircleOutline, SubjectOutlined } from '@material-ui/icons';
+import { AddCircleOutline, LocalGroceryStoreOutlined, SubjectOutlined } from '@material-ui/icons';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -88,6 +88,11 @@ const SideDrawer=()=>{
         }
     ]
 
+    const handleLogout=()=>{
+        logout(dispatch)
+        history.push('/')
+    }
+
     const drawer=(
     <>
         <div>
@@ -122,7 +127,7 @@ const SideDrawer=()=>{
         </List>
         <Button
             endIcon={<ExitToAppIcon/>}
-            onClick={()=>logout(dispatch)}
+            onClick={handleLogout}
         >
             Logout
         </Button>
@@ -134,6 +139,8 @@ const SideDrawer=()=>{
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+
+  
 
     return(
     <>
