@@ -13,10 +13,8 @@ const Items=()=>{
     const { enqueueSnackbar } = useSnackbar();
     const [{user}]=useStateValue();
     const [items,setItems]=useState([]);
-    const [sortedItems,setSortedItems]=useState([])
-    const [filteredItems,setFilteredItems]=useState([])
+    const [searchedItems,setSearchedItems]=useState();
 
-    const [status,setStatus]=useState({type:null,show:false,msg:''})
 
     const handleDelete=async(item)=>{
         const response=await deleteItem(user.uid,item.id,item.category)
@@ -26,21 +24,24 @@ const Items=()=>{
 
     const handleSortAndFilter=async(sortBy,sortOrder,filterBy=[])=>{
         const _sortedItems=await getAllItems(user.uid,[sortBy,sortOrder],filterBy)
+        console.log({_sortedItems})
         setItems(_sortedItems)
-        //setFilteredItems(_sortedItems)
     }
 
     useEffect(async()=>{
         const _items=await getAllItems(user.uid)
-        setItems(_items)
-        // setSortedItems(_items)
-        // setFilteredItems(_items)
-        
+        setItems(_items)        
     },[])
 
-    useEffect(()=>{
-        if(items) setSortedItems(items)
-    },[items])
+    const handleSearch=(searchQuery)=>{
+        if(!searchQuery){
+            setSearchedItems()
+            return;
+        }
+        setSearchedItems(
+            items.filter(item=>item.title.toLowerCase().includes(searchQuery.toLowerCase()))
+        )
+    }
 
     const breakpoints={
         default:3,
@@ -49,7 +50,7 @@ const Items=()=>{
     }
 
     return(
-        <Layout handleSort={handleSortAndFilter}>
+        <Layout handleSort={handleSortAndFilter} handleSearch={handleSearch}>
             <Container>
                 <div style={{height:80}}></div>
                 <Masonry
@@ -58,6 +59,12 @@ const Items=()=>{
                     columnClassName="my-masonry-grid_column"
                 >
                     {
+                        searchedItems ? 
+                        searchedItems.map(item=>                
+                            <div key={item.id} >
+                                <ItemCard item={item} handleDelete={handleDelete} />
+                            </div>)
+                        :
                         items.map(item=>                
                         <div key={item.id} >
                             <ItemCard item={item} handleDelete={handleDelete} />

@@ -9,9 +9,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { grey } from '@material-ui/core/colors';
 
-export const FilterCategory=()=>{
+export const FilterCategory=({handleSort,selectedCategories,setSelectedCategories})=>{
     const [openFilterModal,setOpenFilterModal]=useState(false);
-    const [selectedCategories,setSelectedCategories]=useState([])
     const [categories,setCategories]=useState(Object.keys(constants.categories))
     const handleSelect=(category)=>{
         const isCategorySelected=selectedCategories.includes(category);
@@ -26,6 +25,7 @@ export const FilterCategory=()=>{
     }
     const applyFilters=()=>{
         setOpenFilterModal(false);
+        handleSort();
     }
     return(
         <div>

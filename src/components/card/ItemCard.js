@@ -27,7 +27,6 @@ const useStyles=makeStyles({
 
 export default function ItemCard({item,handleDelete}){
     const classes=useStyles(item)
-    console.log((item.deadline).toDate(),(item.timestamp).toDate())
     return(
         <div>
             <Card elevation={1}>

@@ -1,5 +1,5 @@
 import { AppBar, Avatar, IconButton, makeStyles, fade, Toolbar, Typography } from '@material-ui/core';
-import React from 'react';
+import React,{useState} from 'react';
 import {format} from 'date-fns';
 import { useStateValue } from '../../context/usercontext/AuthProvider';
 import { useTheme } from '@material-ui/core/styles';
@@ -22,6 +22,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { FilterCategory } from '../filter/FilterCategory';
 import { SortItems } from '../sorting/SortItems';
 import SearchItem from '../search/SearchItem';
+import constants from '../../constants/constants';
 
 const useStyles=makeStyles((theme,matches)=>{
     return{
@@ -58,7 +59,7 @@ const useStyles=makeStyles((theme,matches)=>{
 
 })
 
-const Header=({handleSort})=>{
+const Header=({handleSort,handleSearch})=>{
     const theme = useTheme();
     const location=useLocation();
     const history=useHistory()
@@ -67,9 +68,17 @@ const Header=({handleSort})=>{
     console.log({matches})
     const [{user},dispatch]=useStateValue()
 
+    const [sortBy,setSortBy]=useState('timestamp')
+    const [sortOrder,setSortOrder]=useState('desc')
+    const [selectedCategories,setSelectedCategories]=useState(Object.keys(constants.categories))
+
     const handleLogout=()=>{
         logout(dispatch);
         history.push('/')
+    }
+
+    const callSort=()=>{
+        handleSort(sortBy,sortOrder,selectedCategories)
     }
     
     return(
@@ -89,9 +98,19 @@ const Header=({handleSort})=>{
             {
                 location.pathname==='/' && 
                 <Toolbar className={classes.panel}>
-                    <SortItems handleSort={handleSort}/>
-                    <SearchItem/>
-                   <FilterCategory/>
+                    <SortItems 
+                        handleSort={callSort} 
+                        sortBy={sortBy}
+                        setSortBy={setSortBy}
+                        sortOrder={sortOrder}
+                        setSortOrder={setSortOrder}
+                    />
+                    <SearchItem handleSearch={handleSearch}/>
+                   <FilterCategory 
+                        handleSort={callSort}
+                        selectedCategories={selectedCategories}
+                        setSelectedCategories={setSelectedCategories}
+                    />
                 </Toolbar>
             }
 

@@ -36,7 +36,6 @@ export const getAllItems=async(userid,orderBy=['timestamp','desc'],filterBy=[])=
     const collectionRef=await db.collection(userid);
     const isFilterSet=filterBy.length>0 ? true : false;
     const allCategories=Object.keys(constants.categories)
-    console.log({isFilterSet},{allCategories})
     const data=[];
     await collectionRef
         .where(`category`,`in`,isFilterSet ? [...filterBy] : allCategories)

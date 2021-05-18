@@ -21,7 +21,7 @@ const useStyles=makeStyles((theme)=>{
     }
 })
 
-export default function Layout({children,handleSort}){
+export default function Layout({children,handleSort,handleSearch}){
     const classes=useStyles()
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('sm'))
@@ -29,7 +29,7 @@ export default function Layout({children,handleSort}){
     return(
         <div className={classes.root}>
             {!matches && <FloatingActionButton/>} 
-            <Header handleSort={handleSort}/>
+            <Header handleSort={handleSort} handleSearch={handleSearch}/>
             <SideDrawer/>
             <div className={classes.authenticatedPage}>
                 <div className={classes.toolbar}></div>
