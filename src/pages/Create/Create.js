@@ -35,7 +35,6 @@ const Create=()=>{
         if(status) return;
         e.preventDefault()
         setError(constants.initErrorState)
-        console.log(item,category,error,deadline)
         if(item.title && item.details){
             //console.log(item.title,item.details,category,deadline)
             setStatus('loading')

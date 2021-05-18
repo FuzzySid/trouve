@@ -8,7 +8,6 @@ export const authactionTypes={
 }
 
 const authreducer=(state,action)=>{
-    console.log(action)
     switch(action.type){
         case authactionTypes.SET_USER: 
             localStorage.setItem('user',JSON.stringify(action.user))

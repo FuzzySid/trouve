@@ -54,7 +54,6 @@ export const getItemByQuery=async(userid,queryType,query)=>{
     if(queryType!=='filter') return;
     const collectionRef=await db.collection(userid);
     const queryRef=await collectionRef.where('Category'===query);
-    console.log(queryRef)
 }
 
 

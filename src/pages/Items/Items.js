@@ -32,7 +32,6 @@ const Items=()=>{
 
     const handleSortAndFilter=async(sortBy,sortOrder,filterBy=[])=>{
         const _sortedItems=await getAllItems(user.uid,[sortBy,sortOrder],filterBy)
-        console.log({_sortedItems})
         setItems(_sortedItems)
     }
 

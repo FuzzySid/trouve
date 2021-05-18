@@ -8,7 +8,6 @@ export const googleRedirect=()=>{
 export const authenticateWithGoogle=async(dispatch)=>{
         auth.getRedirectResult()
         .then(result=>{
-            console.log(result)
             dispatch({
                 type: authactionTypes.SET_USER,
                 user: result.user
@@ -22,7 +21,6 @@ export const authenticateWithGoogle=async(dispatch)=>{
 export const googleAuthPopup=async(dispatch)=>{
         auth.signInWithPopup(provider)
         .then(result=>{
-            console.log(result)
             dispatch({
                 type: authactionTypes.SET_USER,
                 user: result.user
@@ -39,7 +37,6 @@ export const googleAuthPopup=async(dispatch)=>{
 export const logout=(dispatch)=>{
     auth.signOut()
         .then(()=>{
-            console.log('signout successful')
             dispatch({
                 type:authactionTypes.LOG_OUT,
             })

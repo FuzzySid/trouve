@@ -18,7 +18,6 @@ const Edit=()=>{
     const location=useLocation();
     const itemData=location?.state?.data
     const isEdit=!!itemData;  
-    console.log({itemData})
     const classes=useCreateStyles();
     const [{user}]=useStateValue()
     const {
@@ -45,7 +44,6 @@ const Edit=()=>{
         if(status) return;
         e.preventDefault()
         setError(constants.initErrorState)
-        console.log(item,category,error,deadline)
         if(item.title && item.details){
             //console.log(item.title,item.details,category,deadline)
             setStatus('loading')

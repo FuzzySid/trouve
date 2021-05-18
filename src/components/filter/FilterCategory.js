@@ -14,7 +14,6 @@ export const FilterCategory=({handleSort,selectedCategories,setSelectedCategorie
     const [categories,setCategories]=useState(Object.keys(constants.categories))
     const handleSelect=(category)=>{
         const isCategorySelected=selectedCategories.includes(category);
-        console.log({category},{isCategorySelected})
         if(isCategorySelected){
             //remove it
             setSelectedCategories(selectedCategories.filter(selectedCategory=>selectedCategory!==category))
