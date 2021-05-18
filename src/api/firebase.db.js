@@ -10,27 +10,21 @@ export const addItem=async(userid,item)=>{
     return response;
 }
 
-// const getSingleFCategoryItems=async(dbRef,category)=>{
-//     const docRef=await dbRef.doc(category);
-//     const collectionRef=await docRef.collection(category);
-//     const data=[];
-//     await collectionRef.get().then((querySnapshot) => {
-//         querySnapshot.forEach((doc) => {
-//             // doc.data() is never undefined for query doc snapshots
-//             //console.log(doc.id, " => ", doc.data());
-//             data.push({
-//                 id:doc.id,
-//                 ...doc.data()
-//             })
-//         });
+export const editItem=async(userid,item)=>{
+    const collectionRef=await db.collection(userid);
+    collectionRef.doc(item.id).set({...item,
+            edittedontimestamp:firebase.firestore.FieldValue.serverTimestamp()
+        })
+    .then(() => {
+        console.log("Document successfully written!");
+    })
+    .catch((error) => {
+        console.error("Error writing document: ", error);
+    });
+    return;
+}
 
-//     });
-//     return await data;
-// }
 
-// export const getItemsByCategory=async(userid,category)=>{
-    
-// }
 
 export const getAllItems=async(userid,orderBy=['timestamp','desc'],filterBy=[])=>{
     const collectionRef=await db.collection(userid);
@@ -38,7 +32,7 @@ export const getAllItems=async(userid,orderBy=['timestamp','desc'],filterBy=[])=
     const allCategories=Object.keys(constants.categories)
     const data=[];
     await collectionRef
-        .where(`category`,`in`,isFilterSet ? [...filterBy] : allCategories)
+        //.where(`category`,`in`,isFilterSet ? [...filterBy] : allCategories)
         .orderBy(...orderBy)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {

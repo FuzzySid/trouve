@@ -65,7 +65,6 @@ const Header=({handleSort,handleSearch})=>{
     const history=useHistory()
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
     const classes=useStyles(theme,matches);
-    console.log({matches})
     const [{user},dispatch]=useStateValue()
 
     const [sortBy,setSortBy]=useState('timestamp')
@@ -98,6 +97,7 @@ const Header=({handleSort,handleSearch})=>{
             {
                 location.pathname==='/' && 
                 <Toolbar className={classes.panel}>
+                    <SearchItem handleSearch={handleSearch}/>
                     <SortItems 
                         handleSort={callSort} 
                         sortBy={sortBy}
@@ -105,12 +105,11 @@ const Header=({handleSort,handleSearch})=>{
                         sortOrder={sortOrder}
                         setSortOrder={setSortOrder}
                     />
-                    <SearchItem handleSearch={handleSearch}/>
-                   <FilterCategory 
+                   {/* <FilterCategory 
                         handleSort={callSort}
                         selectedCategories={selectedCategories}
                         setSelectedCategories={setSelectedCategories}
-                    />
+                    /> */}
                 </Toolbar>
             }
 

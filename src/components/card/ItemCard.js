@@ -25,7 +25,7 @@ const useStyles=makeStyles({
     }
 })
 
-export default function ItemCard({item,handleDelete}){
+export default function ItemCard({item,handleDelete,handleEdit}){
     const classes=useStyles(item)
     return(
         <div>
@@ -39,7 +39,7 @@ export default function ItemCard({item,handleDelete}){
                     action={
                         <>
                         <Tooltip title="Edit">
-                            <IconButton onClick={()=>{}}>
+                            <IconButton onClick={()=>handleEdit(item)}>
                                 <EditIcon fontSize="small"/>
                             </IconButton>
                         </Tooltip>

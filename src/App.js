@@ -10,6 +10,7 @@ import { useStateValue } from './context/usercontext/AuthProvider';
 import NotFound from './pages/404/404';
 import Layout from './components/layout/Layout';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import Edit from './pages/Edit/Edit';
 
 const theme=createMuiTheme({
   palette:colors,
@@ -39,6 +40,9 @@ function App() {
             </Route>
             <Route path="/create">
               {user ? <Layout><Create/></Layout> : <NotFound/> }
+            </Route>
+            <Route path="/edit">
+              {user ? <Layout><Edit/></Layout> : <NotFound/> }
             </Route>
           </Switch>
         </Router>

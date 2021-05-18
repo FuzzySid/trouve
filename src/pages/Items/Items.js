@@ -8,8 +8,10 @@ import Masonry from 'react-masonry-css';
 import Toast from '../../components/snackbars/Toast';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import Layout from '../../components/layout/Layout';
+import { useHistory } from 'react-router';
 
 const Items=()=>{
+    const history=useHistory();
     const { enqueueSnackbar } = useSnackbar();
     const [{user}]=useStateValue();
     const [items,setItems]=useState([]);
@@ -20,6 +22,12 @@ const Items=()=>{
         const response=await deleteItem(user.uid,item.id,item.category)
         setItems(items.filter(_item=>_item.id!==item.id))
         enqueueSnackbar('This item has been deleted successfully!', { variant:'success' });
+    }
+
+    const handleEdit=async(item)=>{
+        history.push('/edit',{
+            data:item
+        })
     }
 
     const handleSortAndFilter=async(sortBy,sortOrder,filterBy=[])=>{
@@ -62,12 +70,12 @@ const Items=()=>{
                         searchedItems ? 
                         searchedItems.map(item=>                
                             <div key={item.id} >
-                                <ItemCard item={item} handleDelete={handleDelete} />
+                                <ItemCard item={item} handleDelete={handleDelete} handleEdit={handleEdit}/>
                             </div>)
                         :
                         items.map(item=>                
                         <div key={item.id} >
-                            <ItemCard item={item} handleDelete={handleDelete} />
+                            <ItemCard item={item} handleDelete={handleDelete} handleEdit={handleEdit}/>
                         </div>)
                     }
                 </Masonry>

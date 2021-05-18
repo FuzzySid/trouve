@@ -1,29 +1,39 @@
 import React,{useEffect, useState} from 'react';
 import Container from '@material-ui/core/Container'
-import useCreateStyles from './CreateStyles';
+import useCreateStyles from '../Create/CreateStyles';
 import constants from '../../constants/constants';
 import CreateForm from '../../components/form/CreateForm';
 import { useStateValue } from '../../context/usercontext/AuthProvider';
-import { addItem } from '../../api/firebase.db';
+import { addItem, editItem } from '../../api/firebase.db';
 import {useSnackbar} from 'notistack';
-import { useHistory, useLocation } from 'react-router';
+import { Redirect, useHistory, useLocation } from 'react-router';
 import Layout from '../../components/layout/Layout';
+import NotFound from '../404/404';
 
 
-const Create=()=>{
+const Edit=()=>{
     
     const { enqueueSnackbar }=useSnackbar()
+    const history=useHistory()
+    const location=useLocation();
+    const itemData=location?.state?.data
+    const isEdit=!!itemData;  
+    console.log({itemData})
     const classes=useCreateStyles();
     const [{user}]=useStateValue()
+    const {
+        title,
+        details,
+    }=itemData;
 
     const [item,setItem]=useState({
-        title:'',
-        details:''
+        title,
+        details
     })
 
     const [error,setError]=useState(constants.initErrorState)
-    const [category,setCategory]=useState('Wanderlist')
-    const [deadline,setDeadline]=useState(new Date())
+    const [category,setCategory]=useState(itemData.category)
+    const [deadline,setDeadline]=useState(new Date(itemData.deadline.toDate()))
     const [status,setStatus]=useState()
 
     const handleChange=(e,type)=>{
@@ -39,19 +49,21 @@ const Create=()=>{
         if(item.title && item.details){
             //console.log(item.title,item.details,category,deadline)
             setStatus('loading')
-            const response=await addItem(user.uid,{
+            const response=await editItem(user.uid,{
                 ...item,
+                id:itemData.id,
+                timestamp:itemData.timestamp,
                 category,
                 deadline
             })
-            if(response.error) setStatus('error')
+            if(response?.error) setStatus('error')
             else{
                  setStatus('success');
-                 enqueueSnackbar('New item added!', { variant:'success' });
-                 //history.push('/')
-                 setItem({title:'',details:''});
-                 setCategory('Wanderlist');
-                 setDeadline(new Date())
+                 enqueueSnackbar('Item Updated!', { variant:'success' });
+                 history.push('/');
+                //  setItem({title:'',details:''});
+                //  setCategory('Wanderlist');
+                //  setDeadline(new Date())
             }
 
         }
@@ -67,9 +79,11 @@ const Create=()=>{
         if(status) setTimeout(()=>setStatus(),3000);
     },[status])
 
+    if(!isEdit || !itemData) return (<Redirect to="/"/>)
     return(
             <Container>
                 <CreateForm
+                    edit={true}
                     item={item}
                     classes={classes}
                     handleInputChange={handleChange}
@@ -85,4 +99,4 @@ const Create=()=>{
     )
 }
 
-export default Create;
+export default Edit;

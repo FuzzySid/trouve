@@ -25,7 +25,6 @@ export default function Layout({children,handleSort,handleSearch}){
     const classes=useStyles()
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('sm'))
-    console.log({matches})
     return(
         <div className={classes.root}>
             {!matches && <FloatingActionButton/>} 

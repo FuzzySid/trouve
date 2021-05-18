@@ -7,6 +7,7 @@ import FormTextField from './elements/TextField';
 
 
 const CreateForm=({
+    edit=false,
     item,
     classes,
     handleInputChange,
@@ -20,7 +21,7 @@ const CreateForm=({
 })=>{
     return(
         <>
-            <FormHeader classes={classes}/>
+            <FormHeader edit={edit} classes={classes}/>
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                 <FormTextField 
                     value={item.title}
@@ -51,7 +52,7 @@ const CreateForm=({
                     setDeadline={setDeadline}
                 />
                 }   
-                <FormSubmit status={status} classes={classes} handleSubmit={handleSubmit} />
+                <FormSubmit edit={edit} status={status} classes={classes} handleSubmit={handleSubmit} />
             </form>
         </>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography'
 
-export default function FormHeader({classes}){
+export default function FormHeader({classes,edit=false}){
     return(
         <Typography 
                 className={classes.title}
@@ -10,7 +10,7 @@ export default function FormHeader({classes}){
                 component="h2"
                 gutterBottom
             >
-                Create a New Item
+               {edit ? "Edit Item" : "Create a New Item" } 
             </Typography>
     )
 }
