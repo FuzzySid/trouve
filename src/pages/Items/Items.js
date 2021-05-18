@@ -13,6 +13,8 @@ const Items=()=>{
     const { enqueueSnackbar } = useSnackbar();
     const [{user}]=useStateValue();
     const [items,setItems]=useState([]);
+    const [sortedItems,setSortedItems]=useState([])
+    const [filteredItems,setFilteredItems]=useState([])
 
     const [status,setStatus]=useState({type:null,show:false,msg:''})
 
@@ -22,9 +24,23 @@ const Items=()=>{
         enqueueSnackbar('This item has been deleted successfully!', { variant:'success' });
     }
 
+    const handleSortAndFilter=async(sortBy,sortOrder,filterBy=[])=>{
+        const _sortedItems=await getAllItems(user.uid,[sortBy,sortOrder],filterBy)
+        setItems(_sortedItems)
+        //setFilteredItems(_sortedItems)
+    }
+
     useEffect(async()=>{
-        setItems(await getAllItems(user.uid))
+        const _items=await getAllItems(user.uid)
+        setItems(_items)
+        // setSortedItems(_items)
+        // setFilteredItems(_items)
+        
     },[])
+
+    useEffect(()=>{
+        if(items) setSortedItems(items)
+    },[items])
 
     const breakpoints={
         default:3,
@@ -33,7 +49,7 @@ const Items=()=>{
     }
 
     return(
-        <Layout items={items} setItems={setItems}>
+        <Layout handleSort={handleSortAndFilter}>
             <Container>
                 <div style={{height:80}}></div>
                 <Masonry

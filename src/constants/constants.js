@@ -11,7 +11,7 @@ export default{
     categories:{
         'Eating Places' :{
             id:1,
-            title: 'Eatling Places',
+            title: 'Eating Places',
             icon: <FastfoodIcon fontSize="small"/>,
             color: orange[500],
         },

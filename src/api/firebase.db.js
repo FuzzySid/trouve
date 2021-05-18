@@ -1,5 +1,6 @@
 import { db } from "../firebase.config"
 import firebase from 'firebase'
+import constants from "../constants/constants";
 
 export const addItem=async(userid,item)=>{
     const collectionRef=await db.collection(userid);
@@ -31,10 +32,16 @@ export const addItem=async(userid,item)=>{
     
 // }
 
-export const getAllItems=async(userid)=>{
+export const getAllItems=async(userid,orderBy=['timestamp','desc'],filterBy=[])=>{
     const collectionRef=await db.collection(userid);
+    const isFilterSet=filterBy.length>0 ? true : false;
+    const allCategories=Object.keys(constants.categories)
+    console.log({isFilterSet},{allCategories})
     const data=[];
-    await collectionRef.get().then((querySnapshot) => {
+    await collectionRef
+        .where(`category`,`in`,isFilterSet ? [...filterBy] : allCategories)
+        .orderBy(...orderBy)
+        .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             //console.log(doc.id, " => ", doc.data());

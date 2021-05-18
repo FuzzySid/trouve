@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -10,6 +10,8 @@ import { Container } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 import Logo from '../../trouve-logo.png';
 import { useStateValue } from '../../context/usercontext/AuthProvider';
 import { authenticateWithGoogle, googleAuthPopup, googleRedirect } from '../../auth/firebase.auth';
@@ -71,20 +73,14 @@ export default function NavBar() {
       <nav style={navStyles}>
         <div style={navLeftStyles}>
             <img src={Logo} style={{height:100,width:100}}/>
-            {/* <Typography className={classes.link}>Made with ❤ by FuzzySid</Typography> */}
-            {/* <Typography className={classes.link}>Help</Typography>
-            <Typography className={classes.link}>Features</Typography> */}
         </div>
         <div>
             <Button  
-                //startIcon={<GoogleIcon/>}
-                // endIcon={<ArrowForwardIcon className={classes.iconColor} fontSize="small" />} 
                 endIcon={<GoogleIcon/>}
                 className={classes.btn} 
                 variant="contained" 
                 color="primary"
                 onClick={()=>googleAuthPopup(dispatch)}
-                //onClick={()=>googleRedirect()}
             >
                 Get Started
             </Button>

@@ -19,6 +19,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Tooltip from '@material-ui/core/Tooltip';
+import { FilterCategory } from '../filter/FilterCategory';
+import { SortItems } from '../sorting/SortItems';
+import SearchItem from '../search/SearchItem';
 
 const useStyles=makeStyles((theme,matches)=>{
     return{
@@ -55,7 +58,7 @@ const useStyles=makeStyles((theme,matches)=>{
 
 })
 
-const Header=()=>{
+const Header=({handleSort})=>{
     const theme = useTheme();
     const location=useLocation();
     const history=useHistory()
@@ -86,28 +89,9 @@ const Header=()=>{
             {
                 location.pathname==='/' && 
                 <Toolbar className={classes.panel}>
-                    <Tooltip title="Sort Items" placement="right">
-                        <IconButton><SortIcon/></IconButton>
-                    </Tooltip>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}> 
-                            <SearchIcon fontSize="small"/>
-                        </div>
-                        <InputBase
-                            placeholder="Search items by title..."
-                            fullWidth
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </div>
-                <div>
-                <Tooltip title="Filter By Category" placement="left">
-                    <IconButton><FilterListIcon/></IconButton>
-                </Tooltip>
-                </div>
+                    <SortItems handleSort={handleSort}/>
+                    <SearchItem/>
+                   <FilterCategory/>
                 </Toolbar>
             }
 
