@@ -3,15 +3,16 @@ import firebase from 'firebase'
 import constants from "../constants/constants";
 
 export const addItem=async(userid,item)=>{
-    const collectionRef=await db.collection(userid);
+    const collectionRef=await db.collection('items');
     const response=await collectionRef.add({...item,
+        userid,
         timestamp:firebase.firestore.FieldValue.serverTimestamp()
     })
     return response;
 }
 
 export const editItem=async(userid,item)=>{
-    const collectionRef=await db.collection(userid);
+    const collectionRef=await db.collection('items');
     collectionRef.doc(item.id).set({...item,
             edittedontimestamp:firebase.firestore.FieldValue.serverTimestamp()
         })
@@ -27,12 +28,13 @@ export const editItem=async(userid,item)=>{
 
 
 export const getAllItems=async(userid,orderBy=['timestamp','desc'],filterBy=[])=>{
-    const collectionRef=await db.collection(userid);
+    const collectionRef=await db.collection('items');
     const isFilterSet=filterBy.length>0 ? true : false;
     const allCategories=Object.keys(constants.categories)
     const data=[];
     await collectionRef
-        //.where(`category`,`in`,isFilterSet ? [...filterBy] : allCategories)
+        .where('userid','==',userid)
+        .where(`category`,`in`,isFilterSet ? [...filterBy] : allCategories)
         .orderBy(...orderBy)
         .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -58,7 +60,7 @@ export const getItemByQuery=async(userid,queryType,query)=>{
 
 
 export const deleteItem=async(userid,itemId,itemCategory)=>{
-    const collectionRef=await db.collection(userid);
+    const collectionRef=await db.collection('items');
     const response=await collectionRef.doc(itemId).delete()
     return response;
 }

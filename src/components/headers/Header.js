@@ -97,7 +97,6 @@ const Header=({handleSort,handleSearch})=>{
             {
                 location.pathname==='/' && 
                 <Toolbar className={classes.panel}>
-                    <SearchItem handleSearch={handleSearch}/>
                     <SortItems 
                         handleSort={callSort} 
                         sortBy={sortBy}
@@ -105,11 +104,12 @@ const Header=({handleSort,handleSearch})=>{
                         sortOrder={sortOrder}
                         setSortOrder={setSortOrder}
                     />
-                   {/* <FilterCategory 
+                    <SearchItem handleSearch={handleSearch}/>
+                   <FilterCategory 
                         handleSort={callSort}
                         selectedCategories={selectedCategories}
                         setSelectedCategories={setSelectedCategories}
-                    /> */}
+                    />
                 </Toolbar>
             }
 

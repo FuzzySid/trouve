@@ -51,6 +51,7 @@ const Edit=()=>{
             setStatus('loading')
             const response=await editItem(user.uid,{
                 ...item,
+                userid:user.uid,
                 id:itemData.id,
                 timestamp:itemData.timestamp,
                 category,
