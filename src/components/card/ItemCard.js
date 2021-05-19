@@ -26,6 +26,7 @@ const useStyles=makeStyles({
 })
 
 export default function ItemCard({item,handleDelete,handleEdit}){
+    console.log(item)
     const classes=useStyles(item)
     return(
         <div>

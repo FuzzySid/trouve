@@ -80,7 +80,7 @@ const SideDrawer=()=>{
             icon: <Avatar className={classes.avatar,classes.watchlist}>{constants.categories['Watchlist'].icon}</Avatar>
         },
         {
-            text:'Todos',
+            text:`Todo's`,
             icon: <Avatar className={classes.avatar,classes.todos}>{constants.categories['Todos'].icon}</Avatar>
         }
     ]

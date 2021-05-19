@@ -14,7 +14,7 @@ export default function CategorySelector({category,handleCategoryChange,classes}
                 <RadioGroup onChange={handleCategoryChange} value={category}>
                     {
                         Object.keys(constants.categories).map(category=>
-                            <FormControlLabel control={<Radio className={classes.places} /> } label={category} value={category}></FormControlLabel>
+                            <FormControlLabel control={<Radio className={classes.places} /> } label={constants.categories[category].title} value={category}></FormControlLabel>
                         )
                     }
                 </RadioGroup>

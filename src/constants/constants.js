@@ -23,7 +23,7 @@ export default{
         },
         'Todos' :{
             id:1,
-            title: 'Todos',
+            title: `Todo's`,
             icon: <PlaylistAddCheckIcon fontSize="small"/>,
             color:blue[500],
         },

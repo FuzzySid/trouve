@@ -19,19 +19,19 @@ const Edit=()=>{
     const isEdit=!!itemData;  
     const classes=useCreateStyles();
     const [{user}]=useStateValue()
-    const {
-        title,
-        details,
-    }=itemData;
 
     const [item,setItem]=useState({
-        title,
-        details
+        title: itemData?.title,
+        details:  itemData?.details
     })
 
     const [error,setError]=useState(constants.initErrorState)
-    const [category,setCategory]=useState(itemData.category)
-    const [deadline,setDeadline]=useState(new Date(itemData.deadline.toDate()))
+    const [category,setCategory]=useState(itemData?.category)
+    const [deadline,setDeadline]=useState(
+        (itemData && itemData.deadline) ? new Date(itemData.deadline.toDate)
+        :
+        new Date()
+    )
     const [status,setStatus]=useState()
 
     const handleChange=(e,type)=>{
