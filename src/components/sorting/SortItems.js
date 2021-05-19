@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
-import { AppBar, Avatar, IconButton, makeStyles, fade, Toolbar, Typography, Button, withStyles, Grid } from '@material-ui/core';
+import { IconButton,Typography, Button,Grid } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 import Modal from '../modal/Modal';
 import {FormControlLabel, FormLabel} from '@material-ui/core';

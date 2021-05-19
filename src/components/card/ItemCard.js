@@ -5,7 +5,7 @@ import { DeleteOutlined, MoreVertOutlined } from '@material-ui/icons';
 import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import constants from '../../constants/constants';
-import {formatDistance} from 'date-fns'
+import {formatDistance,format} from 'date-fns'
 
 const useStyles=makeStyles({
     avatar:{
@@ -60,10 +60,9 @@ export default function ItemCard({item,handleDelete,handleEdit}){
                     <Container className={classes.dueDate}>
                         <Typography variant="caption" >
                                 Due :  
-                                {" "+formatDistance(
+                                {" "+format(
                                 (item.deadline).toDate(),
-                                new Date(),
-                                { addSuffix: true }
+                                'dd MMM yyyy'
                                 )}
                         </Typography>
                     </Container>

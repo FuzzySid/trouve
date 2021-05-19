@@ -7,9 +7,7 @@ import { useStateValue } from '../../context/usercontext/AuthProvider';
 
 const LandingPage=()=>{
     const [,dispatch]=useStateValue()
-    // useEffect(()=>{
-    //     authenticateWithGoogle(dispatch)
-    // },[])
+
     return(
         <Container>
             <NavBar/>

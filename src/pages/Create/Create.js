@@ -6,8 +6,7 @@ import CreateForm from '../../components/form/CreateForm';
 import { useStateValue } from '../../context/usercontext/AuthProvider';
 import { addItem } from '../../api/firebase.db';
 import {useSnackbar} from 'notistack';
-import { useHistory, useLocation } from 'react-router';
-import Layout from '../../components/layout/Layout';
+
 
 
 const Create=()=>{
@@ -22,7 +21,7 @@ const Create=()=>{
     })
 
     const [error,setError]=useState(constants.initErrorState)
-    const [category,setCategory]=useState('Wanderlist')
+    const [category,setCategory]=useState('Todos')
     const [deadline,setDeadline]=useState(new Date())
     const [status,setStatus]=useState()
 
@@ -38,11 +37,12 @@ const Create=()=>{
         if(item.title && item.details){
             //console.log(item.title,item.details,category,deadline)
             setStatus('loading')
-            const response=await addItem(user.uid,{
+            let itemObject={
                 ...item,
                 category,
-                deadline
-            })
+            }
+            if(category==='Todos') itemObject.deadline=deadline;
+            const response=await addItem(user.uid,itemObject)
             if(response.error) setStatus('error')
             else{
                  setStatus('success');

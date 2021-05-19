@@ -1,10 +1,9 @@
-import { Button, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import { useHistory, useLocation } from 'react-router';
 import HomeIcon from '@material-ui/icons/Home';
-import { purple,blue,indigo } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
    primary: {

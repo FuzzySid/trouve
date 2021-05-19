@@ -4,11 +4,10 @@ import useCreateStyles from '../Create/CreateStyles';
 import constants from '../../constants/constants';
 import CreateForm from '../../components/form/CreateForm';
 import { useStateValue } from '../../context/usercontext/AuthProvider';
-import { addItem, editItem } from '../../api/firebase.db';
+import { editItem } from '../../api/firebase.db';
 import {useSnackbar} from 'notistack';
 import { Redirect, useHistory, useLocation } from 'react-router';
-import Layout from '../../components/layout/Layout';
-import NotFound from '../404/404';
+
 
 
 const Edit=()=>{
@@ -47,14 +46,16 @@ const Edit=()=>{
         if(item.title && item.details){
             //console.log(item.title,item.details,category,deadline)
             setStatus('loading')
-            const response=await editItem(user.uid,{
+            let itemObject={
                 ...item,
                 userid:user.uid,
                 id:itemData.id,
                 timestamp:itemData.timestamp,
                 category,
-                deadline
-            })
+                
+            }
+            if(category==='Todos') itemObject.deadline=deadline;
+            const response=await editItem(user.uid,itemObject)
             if(response?.error) setStatus('error')
             else{
                  setStatus('success');

@@ -1,13 +1,10 @@
 import { Avatar, Button, Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from '@material-ui/core';
-import { AddCircleOutline, LocalGroceryStoreOutlined, SubjectOutlined } from '@material-ui/icons';
+import { AddCircleOutline, SubjectOutlined } from '@material-ui/icons';
 import React from 'react';
 import { useHistory, useLocation } from 'react-router';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useStateValue } from '../../../context/usercontext/AuthProvider';
 import { logout } from '../../../auth/firebase.auth';
-import { blue, green, orange } from '@material-ui/core/colors';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Hidden from '@material-ui/core/Hidden';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import constants from '../../../constants/constants';

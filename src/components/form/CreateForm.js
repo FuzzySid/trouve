@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import CategorySelector from './elements/CategorySelector';
 import DeadlineSelector from './elements/DeadlineSelector';
 import FormHeader from './elements/FormHeader';

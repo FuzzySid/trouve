@@ -1,13 +1,10 @@
 import React,{useState} from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import { AppBar, Avatar, IconButton, makeStyles, fade, Toolbar, Typography, List, ListItem, ListItemText,ListItemIcon, Button } from '@material-ui/core';
+import { Avatar, IconButton, List, ListItem, ListItemText,ListItemIcon, Button } from '@material-ui/core';
 import Modal from '../modal/Modal';
 import constants from '../../constants/constants';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { grey } from '@material-ui/core/colors';
+
 
 export const FilterCategory=({handleSort,selectedCategories,setSelectedCategories})=>{
     const [openFilterModal,setOpenFilterModal]=useState(false);
