@@ -28,7 +28,7 @@ const Edit=()=>{
     const [error,setError]=useState(constants.initErrorState)
     const [category,setCategory]=useState(itemData?.category)
     const [deadline,setDeadline]=useState(
-        (itemData && itemData.deadline) ? new Date(itemData.deadline.toDate)
+        (itemData && itemData.deadline) ? new Date(itemData.deadline.toDate())
         :
         new Date()
     )
