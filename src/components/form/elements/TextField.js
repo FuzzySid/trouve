@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField} from '@material-ui/core';
 
 
-export default function FormTextField({value,classes,handleChange,error,label,isMultiline=false,rows=1}){
+export default function FormTextField({value,required=true,classes,handleChange,error,label,isMultiline=false,rows=1}){
     return(
         <TextField 
         value={value}
@@ -14,8 +14,8 @@ export default function FormTextField({value,classes,handleChange,error,label,is
         variant="outlined"
         color="secondary"
         fullWidth
-        required
-        error={error.title}
+        required={required}
+        error={error}
     />
     )
 }

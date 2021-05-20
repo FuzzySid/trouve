@@ -27,17 +27,18 @@ const CreateForm=({
                     value={item.title}
                     handleChange={handleInputChange}
                     classes={classes}
-                    error={error}
+                    error={error.title}
                     label={"Title"}
                 />
                 <FormTextField 
                     value={item.details}
                     handleChange={handleInputChange}
                     classes={classes}
-                    error={error}
+                    error={error.details}
                     label={"Details"}
                     isMultiline
                     rows={4}
+                    required={false}
                 />
                 <CategorySelector
                     classes={classes}

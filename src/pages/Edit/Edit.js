@@ -43,7 +43,7 @@ const Edit=()=>{
         if(status) return;
         e.preventDefault()
         setError(constants.initErrorState)
-        if(item.title && item.details){
+        if(item.title){
             //console.log(item.title,item.details,category,deadline)
             setStatus('loading')
             let itemObject={
@@ -70,7 +70,6 @@ const Edit=()=>{
         else{
             setError({
                 title:!item.title,
-                details:!item.details
             })
         }
     }
