@@ -7,7 +7,7 @@ import {
   import 'date-fns';
   import DateFnsUtils from '@date-io/date-fns';
 
-export default function DeadlineSelector({classes,setDeadline,deadline}){
+export default function DeadlineSelector({classes,setDeadline,deadline,category}){
     return(
     <FormControl className={classes.field}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -17,7 +17,7 @@ export default function DeadlineSelector({classes,setDeadline,deadline}){
             format="MM/dd/yyyy"
             margin="normal"
             id="date-picker-inline"
-            label="Deadline"
+            label={category==='Todos' ? "Deadline" : "Due Date"}
             value={deadline}
             autoOk={true}
             onChange={(date)=>setDeadline(date)}

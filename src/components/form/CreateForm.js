@@ -45,14 +45,12 @@ const CreateForm=({
                     category={category}
                     handleCategoryChange={handleCategoryChange}
                 />
-                {
-                category==='Todos' &&
-                    <DeadlineSelector 
+                <DeadlineSelector 
+                    category={category}
                     classes={classes}
                     deadline={deadline}
                     setDeadline={setDeadline}
-                />
-                }   
+                /> 
                 <FormSubmit edit={edit} status={status} classes={classes} handleSubmit={handleSubmit} />
             </form>
         </>

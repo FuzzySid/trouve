@@ -57,10 +57,12 @@ export default function ItemCard({item,handleDelete,handleEdit}){
                 />
                 {
                     
-                    item.category==='Todos' &&
+                    item.deadline &&
                     <Container className={classes.dueDate}>
                         <Typography variant="caption" >
-                                Due :  
+                                {
+                                    item.category==='Todos' ? 'Deadline' : 'Due'
+                                } :  
                                 {" "+format(
                                 (item.deadline).toDate(),
                                 'dd MMM yyyy'

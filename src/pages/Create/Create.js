@@ -41,7 +41,7 @@ const Create=()=>{
                 ...item,
                 category,
             }
-            if(category==='Todos') itemObject.deadline=deadline;
+            itemObject.deadline=deadline;
             const response=await addItem(user.uid,itemObject)
             if(response.error) setStatus('error')
             else{
