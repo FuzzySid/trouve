@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import React from 'react';
+import React,{useState} from 'react';
 import FloatingActionButton from '../buttons/FloatingActionButton/FloatingActionButton';
 import SideDrawer from '../drawers/sidedrawer/SideDrawer';
 import Header from '../headers/Header';
@@ -25,11 +25,12 @@ export default function Layout({children,handleSort,handleSearch}){
     const classes=useStyles()
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up('sm'))
+    const [showSideDrawer,setShowSideDrawer]=useState(matches);
     return(
         <div className={classes.root}>
             {!matches && <FloatingActionButton/>} 
-            <Header handleSort={handleSort} handleSearch={handleSearch}/>
-            <SideDrawer/>
+            <Header showSideDrawer={showSideDrawer} setShowSideDrawer={setShowSideDrawer} handleSort={handleSort} handleSearch={handleSearch}/>
+            <SideDrawer showSideDrawer={showSideDrawer} setShowSideDrawer={setShowSideDrawer} />
             <div className={classes.authenticatedPage}>
                 <div className={classes.toolbar}></div>
                 {children}

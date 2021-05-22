@@ -29,22 +29,29 @@ function App() {
 
   return (
    <ThemeProvider theme={theme}>
-     <SnackbarProvider maxSnack={3} anchorOrigin={{horizontal:'right',vertical:'bottom'}} >
+     <SnackbarProvider maxSnack={3} anchorOrigin={{horizontal:'right',vertical:'bottom'}} autoHideDuration={2000} >
       <Router>
+        {
+          user  ? 
           <Switch>
-            
-            <Route exact path="/">
-              {
-                user? <Items/>  : <LandingPage/>
-              }              
-            </Route>
-            <Route path="/create">
-              {user ? <Layout><Create/></Layout> : <NotFound/> }
-            </Route>
-            <Route path="/edit">
-              {user ? <Layout><Edit/></Layout> : <NotFound/> }
-            </Route>
+              
+              <Route exact path="/">
+                <Items/>     
+              </Route>
+              <Route path="/create">
+                <Layout><Create/></Layout> 
+              </Route>
+              <Route path="/edit">
+                  <Layout><Edit/></Layout> 
+              </Route>
+              <Route>
+                <NotFound/>
+              </Route>
           </Switch>
+          :
+          <LandingPage/>
+        }
+          
         </Router>
      </SnackbarProvider>
 

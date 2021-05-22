@@ -54,3 +54,12 @@
   /* background: grey; */
   margin-bottom: 30px;
 }
+
+.mobile-drawer-container{
+    width: 250px;
+    /* text-align: center; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+}

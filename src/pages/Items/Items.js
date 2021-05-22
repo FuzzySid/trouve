@@ -59,6 +59,7 @@ const Items=()=>{
 
     const breakpoints={
         default:3,
+        1600:3,
         1100:2,
         700:1
     }

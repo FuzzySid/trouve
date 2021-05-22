@@ -5,6 +5,7 @@ import { useStateValue } from '../../context/usercontext/AuthProvider';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { ExitToAppOutlined } from '@material-ui/icons';
+import MenuIcon from '@material-ui/icons/Menu';
 import {logout} from '../../auth/firebase.auth';
 import { useHistory, useLocation } from 'react-router';
 import { FilterCategory } from '../filter/FilterCategory';
@@ -19,7 +20,7 @@ const useStyles=makeStyles((theme,matches)=>{
         },
         search:{
             //flexGrow:1,
-            flex:0.8,
+            flex:0.9,
             display:'flex',
             alignItems:'center',
             backgroundColor: '#F9F9F9',
@@ -40,14 +41,19 @@ const useStyles=makeStyles((theme,matches)=>{
             justifyContent:'space-between'
         },
         searchIcon:{
-            marginLeft:theme.spacing(2),
+            marginLeft:theme.spacing(1),
             marginRight:theme.spacing(1)
         }
     }
 
 })
 
-const Header=({handleSort,handleSearch})=>{
+const Header=({
+    handleSort,
+    handleSearch, 
+    showSideDrawer,
+    setShowSideDrawer
+})=>{
     const theme = useTheme();
     const location=useLocation();
     const history=useHistory()
@@ -59,9 +65,8 @@ const Header=({handleSort,handleSearch})=>{
     const [sortOrder,setSortOrder]=useState('desc')
     const [selectedCategories,setSelectedCategories]=useState(Object.keys(constants.categories))
 
-    const handleLogout=()=>{
-        logout(dispatch);
-        history.push('/')
+    const handleOpenSideDrawer=()=>{
+        setShowSideDrawer(true);
     }
 
     const callSort=()=>{
@@ -70,17 +75,23 @@ const Header=({handleSort,handleSearch})=>{
     
     return(
         <AppBar elevation={0} className={classes.appbar} style={{width: matches ? 'calc(100% - 240px)' : '100%'}}>
-            <Toolbar>
-                <Typography className={classes.date}>
-                    {format(new Date(),'do MMMM Y')}
-                </Typography>
-                <Typography>
-                    {user?.displayName}
-                </Typography>
-                <Avatar 
-                    className={classes.avatar} 
-                    src={user?.photoURL} />
-                {!matches &&  <IconButton onClick={handleLogout}><ExitToAppOutlined/> </IconButton>}
+            <Toolbar className={classes.panel}>
+                {!matches &&  <IconButton style={{color: 'rgba(0, 0, 0, 0.87)'}} onClick={handleOpenSideDrawer}><MenuIcon/> </IconButton>}
+                {
+                matches &&
+                    <Typography className={classes.date}>
+                        {format(new Date(),'do MMMM Y')}
+                    </Typography>
+                }
+                <div className={classes.panel}>
+                    <Typography>
+                        {user?.displayName}
+                    </Typography>
+                    <Avatar 
+                        className={classes.avatar} 
+                        src={user?.photoURL} />
+                </div>
+
             </Toolbar>
             {
                 location.pathname==='/' && 

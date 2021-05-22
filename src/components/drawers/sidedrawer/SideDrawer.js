@@ -8,6 +8,7 @@ import { logout } from '../../../auth/firebase.auth';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import constants from '../../../constants/constants';
+import MobileDrawer from './MobileDrawer';
 
 
 const drawerWidth=240;
@@ -50,7 +51,7 @@ const useStyles=makeStyles((theme)=>{
 
 })
 
-const SideDrawer=()=>{
+const SideDrawer=({showSideDrawer, setShowSideDrawer})=>{
     const classes=useStyles()
     const history=useHistory()
     const location=useLocation()
@@ -142,7 +143,7 @@ const SideDrawer=()=>{
     return(
     <>
     {
-        matches ? 
+        matches  ? 
         <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -151,6 +152,9 @@ const SideDrawer=()=>{
     >
         {drawer}
     </Drawer>
+    :
+        showSideDrawer ? 
+        <MobileDrawer open={showSideDrawer} setOpen={setShowSideDrawer} drawer={drawer} />
     :
     <></>
     }
