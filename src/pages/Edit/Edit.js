@@ -44,10 +44,10 @@ const Edit=()=>{
         e.preventDefault()
         setError(constants.initErrorState)
         if(item.title){
-            //console.log(item.title,item.details,category,deadline)
             setStatus('loading')
             let itemObject={
                 ...item,
+                isSaved:itemData.isSaved,
                 userid:user.uid,
                 id:itemData.id,
                 timestamp:itemData.timestamp,
@@ -55,6 +55,7 @@ const Edit=()=>{
                 
             }
             itemObject.deadline=deadline;
+            console.log('updating item->',itemObject)
             const response=await editItem(user.uid,itemObject)
             if(response?.error) setStatus('error')
             else{

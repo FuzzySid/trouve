@@ -2,6 +2,7 @@ import { Avatar, Card, CardContent, CardHeader, Container, Grid, IconButton, mak
 import { blue, green, grey, orange, yellow } from '@material-ui/core/colors';
 import EditIcon from '@material-ui/icons/Edit';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { DeleteOutlined, MoreVertOutlined } from '@material-ui/icons';
 import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
@@ -14,7 +15,12 @@ const useStyles=makeStyles({
             return constants.categories[category].color
         }
     },
-
+    action:{
+        margin:'5px 10px'
+    },
+    actionItem:{
+        margin:2
+    },
     createdontimestamp:{
         color: grey[400],
         fontSize:10
@@ -27,7 +33,7 @@ const useStyles=makeStyles({
     }
 })
 
-export default function ItemCard({item,handleDelete,handleEdit}){
+export default function ItemCard({item,handleDelete,handleEdit, handleSave}){
     const classes=useStyles(item)
     return(
         <div>
@@ -40,23 +46,28 @@ export default function ItemCard({item,handleDelete,handleEdit}){
                     }
                     action={
                         <Grid container className={classes.action}>
-                             {/* <Grid item >
-                                <Tooltip title="Save">
-                                    <IconButton onClick={()=>{}}>
+                             <Grid item className={classes.actionItem} >
+                                <Tooltip title={item.isSaved ? "Unsave" : "Save"}>
+                                    <IconButton size="small" onClick={()=>handleSave(item, !item.isSaved)}>
+                                      {
+                                        item.isSaved ?
+                                        <BookmarkIcon fontSize="small" />
+                                        :
                                         <BookmarkBorderIcon fontSize="small"/>
+                                      }
                                     </IconButton>
                                 </Tooltip>
-                            </Grid> */}
-                            <Grid item >
+                            </Grid>
+                            <Grid item className={classes.actionItem} >
                                 <Tooltip title="Edit">
-                                    <IconButton onClick={()=>handleEdit(item)}>
+                                    <IconButton size="small" onClick={()=>handleEdit(item)}>
                                         <EditIcon fontSize="small"/>
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
-                            <Grid item >
+                            <Grid item className={classes.actionItem} >
                                 <Tooltip title="Delete">
-                                    <IconButton onClick={()=>handleDelete(item)}>
+                                    <IconButton size="small" onClick={()=>handleDelete(item)}>
                                         <DeleteOutlined fontSize="small"/>
                                     </IconButton>
                                 </Tooltip>
@@ -65,7 +76,7 @@ export default function ItemCard({item,handleDelete,handleEdit}){
                         </Grid>
                     }
                     title={item.title}
-                    subheader={item.category}
+                    subheader={constants.categories[item.category].title}
                 />
                 {
                     

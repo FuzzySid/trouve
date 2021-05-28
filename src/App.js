@@ -11,6 +11,7 @@ import NotFound from './pages/404/404';
 import Layout from './components/layout/Layout';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import Edit from './pages/Edit/Edit';
+import Saved from './pages/Items/Saved';
 
 const theme=createMuiTheme({
   palette:colors,
@@ -43,6 +44,9 @@ function App() {
               </Route>
               <Route path="/edit">
                   <Layout><Edit/></Layout> 
+              </Route>
+              <Route path="/saved">
+                <Saved/>
               </Route>
               <Route>
                 <NotFound/>

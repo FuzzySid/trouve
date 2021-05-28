@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
 import ItemCard from '../../components/card/ItemCard';
 import { useStateValue } from '../../context/usercontext/AuthProvider';
-import { deleteItem, getAllItems } from '../../api/firebase.db';
+import { addToTrash, deleteItem, getAllItems, saveItem, unsaveItem } from '../../api/firebase.db';
 import Masonry from 'react-masonry-css';
-import Toast from '../../components/snackbars/Toast';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import Layout from '../../components/layout/Layout';
 import { useHistory } from 'react-router';
-import ItemsSkeleton from '../../components/loaders/skeletons/ItemsSkeleton';
 import SkeletonCard from '../../components/loaders/skeletons/SkeletonCard';
 
-const Items=()=>{
+const Items=({type="items"})=>{
     const history=useHistory();
     const [loading,setLoading]=useState(true);
     const { enqueueSnackbar } = useSnackbar();
@@ -22,9 +19,22 @@ const Items=()=>{
 
 
     const handleDelete=async(item)=>{
-        const response=await deleteItem(user.uid,item.id,item.category)
+        const response=await addToTrash(user.uid,item)
         setItems(items.filter(_item=>_item.id!==item.id))
         enqueueSnackbar('This item has been deleted successfully!', { variant:'success' });
+    }
+
+    const handleSave=async(item,save=true)=>{
+        const response= save ? await saveItem(user.uid,item) : await unsaveItem(user.uid,item);
+        setItems(items.map(_item=>{
+            if(_item.id===item.id) return{
+                ..._item,
+                isSaved: save
+            }
+            else return _item;
+        }))
+        if(!save && type==='saved') setItems(items.filter(_item=>_item.id!==item.id))
+        enqueueSnackbar(`This item was ${save ? 'saved!' : 'unsaved'}`, { variant:'success' });
     }
 
     const handleEdit=async(item)=>{
@@ -35,14 +45,14 @@ const Items=()=>{
 
     const handleSortAndFilter=async(sortBy,sortOrder,filterBy=[])=>{
         if(!loading) setLoading(true);
-        const _sortedItems=await getAllItems(user.uid,[sortBy,sortOrder],filterBy)
+        const _sortedItems=await getAllItems(user.uid,[sortBy,sortOrder],filterBy,type)
         setItems(_sortedItems)
         setLoading(false);
     }
 
     useEffect(async()=>{
         if(!loading) setLoading(true);
-        const _items=await getAllItems(user.uid)
+        const _items=await getAllItems(user.uid,['timestamp','desc'],[],type)
         setItems(_items)        
         setLoading(false)
     },[])
@@ -81,12 +91,12 @@ const Items=()=>{
                         searchedItems ? 
                         searchedItems.map(item=>                
                             <div key={item.id} >
-                                <ItemCard item={item} handleDelete={handleDelete} handleEdit={handleEdit}/>
+                                <ItemCard item={item} handleSave={handleSave} handleDelete={handleDelete} handleEdit={handleEdit}/>
                             </div>)
                         :
                         items.map(item=>                
                         <div key={item.id} >
-                            <ItemCard item={item} handleDelete={handleDelete} handleEdit={handleEdit}/>
+                            <ItemCard item={item} handleSave={handleSave} handleDelete={handleDelete} handleEdit={handleEdit}/>
                         </div>)
                     
                 }

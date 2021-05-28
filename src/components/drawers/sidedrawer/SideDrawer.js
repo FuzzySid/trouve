@@ -9,7 +9,9 @@ import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import constants from '../../../constants/constants';
 import MobileDrawer from './MobileDrawer';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import { grey, red } from '@material-ui/core/colors';
 
 const drawerWidth=240;
 const avatar={
@@ -44,6 +46,14 @@ const useStyles=makeStyles((theme)=>{
         },
         todos:{
             backgroundColor:constants.categories['Todos'].color,
+            ...avatar
+        },
+        trash:{
+            backgroundColor: grey[500],
+            ...avatar
+        },
+        saved:{
+            backgroundColor: red[300],
             ...avatar
         }
 
@@ -83,7 +93,18 @@ const SideDrawer=({showSideDrawer, setShowSideDrawer})=>{
         {
             text:`Todo's`,
             icon: <Avatar className={classes.avatar,classes.todos}>{constants.categories['Todos'].icon}</Avatar>
-        }
+        },
+        {
+            text:`Saved`,
+            icon: <Avatar className={classes.avatar,classes.saved}><BookmarkIcon fontSize="small"/></Avatar>,
+            path:'/saved'
+        },
+        {
+            text:`Trash`,
+            icon: <Avatar className={classes.avatar,classes.trash}><DeleteIcon fontSize="small"/></Avatar>
+        },
+
+
     ]
 
     const handleLogout=()=>{
