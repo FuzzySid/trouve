@@ -2,7 +2,10 @@ import { cyan, deepOrange, deepPurple, purple, yellow, red } from '@material-ui/
 
 export default{
     primary:{
-        main:'#fefefe'
+      light: '#bdbdbd',
+      main: '#bdbdbd',
+      dark: '#bdbdbd',
+      contrastText: '#fff'
       },
       secondary:purple,
     //   places:deepPurple,

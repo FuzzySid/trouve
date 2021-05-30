@@ -4,9 +4,12 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { Avatar, IconButton, List, ListItem, ListItemText,ListItemIcon, Button } from '@material-ui/core';
 import Modal from '../modal/Modal';
 import constants from '../../constants/constants';
+import { useTrouveTheme } from '../../context/themecontext/Theme';
+import { grey } from '@material-ui/core/colors';
 
 
 export const FilterCategory=({handleSort,selectedCategories,setSelectedCategories})=>{
+    const {themeType}=useTrouveTheme()
     const [openFilterModal,setOpenFilterModal]=useState(false);
     const [categories,setCategories]=useState(Object.keys(constants.categories))
     const handleSelect=(category)=>{
@@ -26,7 +29,7 @@ export const FilterCategory=({handleSort,selectedCategories,setSelectedCategorie
     return(
         <div>
             <Tooltip title="Filter By Category" placement="left">
-                <IconButton onClick={()=>setOpenFilterModal(true)}><FilterListIcon/></IconButton>
+                <IconButton onClick={()=>setOpenFilterModal(true)}><FilterListIcon color={themeType==='light' ? grey[800] :"primary"}/></IconButton>
             </Tooltip>
             <Modal 
                 open={openFilterModal}

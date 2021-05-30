@@ -12,7 +12,7 @@ const useStyles=makeStyles((theme)=>{
             display:'flex'
         },
         authenticatedPage:{
-            background:'#f9f9f9',
+            background: theme.type==='dark' ? '#303030' : '#f9f9f9',
             width:'100%',
             minHeight:'100vh',
             padding:theme.spacing(3)

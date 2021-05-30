@@ -12,6 +12,7 @@ import MobileDrawer from './MobileDrawer';
 import DeleteIcon from '@material-ui/icons/Delete';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { grey, red } from '@material-ui/core/colors';
+import Switches from '../../switches/Switches';
 
 const drawerWidth=240;
 const avatar={
@@ -21,14 +22,19 @@ const avatar={
 }
 const useStyles=makeStyles((theme)=>{
     return{
+        drawerPaper:{
+           
+        },
         drawer:{
-            width:drawerWidth
+            width:drawerWidth,
         },
         drawerPaper:{
-            width:drawerWidth
+            width:drawerWidth,
+            backgroundColor: theme.type==='dark' ? '#333333' : '#fff',
+            color: theme.type==='dark' ? '#bdbdbd' : '#212121'
         },
         active:{
-            background:'#f4f4f4'
+            background: theme.type==='dark' ? '#424242' : '#f4f4f4'
         },
         title:{
             padding:theme.spacing(2)
@@ -55,6 +61,10 @@ const useStyles=makeStyles((theme)=>{
         saved:{
             backgroundColor: red[300],
             ...avatar
+        },
+        logout:{
+            color: theme.type==='dark' ? '#bdbdbd' : '#212121'
+
         }
 
     }
@@ -106,7 +116,6 @@ const SideDrawer=({showSideDrawer, setShowSideDrawer})=>{
         },
       
 
-
     ]
 
     const handleLogout=()=>{
@@ -133,6 +142,9 @@ const SideDrawer=({showSideDrawer, setShowSideDrawer})=>{
                     <ListItemText primary={draweritem.text}/>
                 </ListItem>
             ))}
+            <ListItem>
+                <Switches/>
+            </ListItem>
             <Typography className={classes.title}>Categories</Typography>
             {drawerCategory.map(category=>(
                 <ListItem 
@@ -149,6 +161,7 @@ const SideDrawer=({showSideDrawer, setShowSideDrawer})=>{
         <Button
             endIcon={<ExitToAppIcon/>}
             onClick={handleLogout}
+            className={classes.logout}
         >
             Logout
         </Button>
@@ -173,7 +186,9 @@ const SideDrawer=({showSideDrawer, setShowSideDrawer})=>{
         anchor="left"
         classes={{paper:classes.drawerPaper}}
     >
-        {drawer}
+        <>
+            {drawer}
+        </>
     </Drawer>
     :
         showSideDrawer ? 

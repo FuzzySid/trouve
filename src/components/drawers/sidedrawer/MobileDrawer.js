@@ -10,20 +10,33 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+// import classes from '*.module.css';
 
-const useStyles = makeStyles({
-  list: {
-    width: 350,
-  },
-  fullList: {
-    width: 'auto',
-  },
+const useStyles = makeStyles((theme)=>{
+  return{
+    list: {
+      width: 350,
+    },
+    fullList: {
+      width: 'auto',
+    },
+    mobileDrawer:{
+      // width:drawerWidth,
+      width: 250,
+      height:'100%',
+      display:'flex',
+      flexDirection:'column',
+      backgroundColor: theme.type==='dark' ? '#333333' : '#fff',
+      color: theme.type==='dark' ? '#bdbdbd' : '#212121'
+    },
+  }
+
 });
 
 export default function MobileDrawer({open,setOpen,drawer}) {
 
   const toggleDrawer = ()=> setOpen(!open)
-
+  const classes=useStyles()
 
   return (
     <div>
@@ -35,7 +48,7 @@ export default function MobileDrawer({open,setOpen,drawer}) {
             onClose={toggleDrawer}
             onOpen={toggleDrawer}
           >
-            <div className="mobile-drawer-container">
+            <div className={classes.mobileDrawer}>
                 {drawer}
             </div>
           </SwipeableDrawer>

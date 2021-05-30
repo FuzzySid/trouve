@@ -21,7 +21,7 @@ const Items=({type="items"})=>{
     const handleDelete=async(item)=>{
         const response= type==='trash' ? await deleteItem(user.uid,item.id,'trash') : await addToTrash(user.uid,item)
         setItems(items.filter(_item=>_item.id!==item.id))
-        enqueueSnackbar('This item has been deleted successfully!', { variant:'success' });
+        enqueueSnackbar(type==='trash' ? 'This item has been deleted successfully!' : 'Item moved to trash', { variant:'success' });
     }
 
     const handleSave=async(item,save=true)=>{

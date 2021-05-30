@@ -8,8 +8,15 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React from 'react';
 import constants from '../../constants/constants';
 import {formatDistance,format} from 'date-fns'
+import { useTrouveTheme } from '../../context/themecontext/Theme';
 
-const useStyles=makeStyles({
+const useStyles=makeStyles((theme)=>{
+   return{
+    card:{
+        backgroundColor:theme.type==='dark' ? '#424242' : '#FFF' ,
+        color: theme.type==='dark' ? '#bdbdbd' : '#212121'
+
+    },
     avatar:{
         backgroundColor: ({category})=>{
             return constants.categories[category].color
@@ -29,15 +36,22 @@ const useStyles=makeStyles({
         marginBottom:10
     },
     dueDate:{
-        padding:'0 16px'
+        padding:'0 16px',
+
+    },
+    details:{
+        color: theme.type==='dark' ? '#bdbdbd' : '#212121'
+
     }
+   } 
 })
 
 export default function ItemCard({type,item,handleDelete,handleEdit, handleSave}){
+    const {themeType}=useTrouveTheme()
     const classes=useStyles(item)
     return(
         <div>
-            <Card elevation={1}>
+            <Card elevation={1} className={classes.card}>
                 <CardHeader
                     avatar={
                         <Avatar className={classes.avatar}>
@@ -52,9 +66,9 @@ export default function ItemCard({type,item,handleDelete,handleEdit, handleSave}
                                         <IconButton size="small" onClick={()=>handleSave(item, !item.isSaved)}>
                                         {
                                             item.isSaved ?
-                                            <BookmarkIcon fontSize="small" />
+                                            <BookmarkIcon fontSize="small" color={themeType==='light' ? grey[800] :"primary"}/>
                                             :
-                                            <BookmarkBorderIcon fontSize="small"/>
+                                            <BookmarkBorderIcon fontSize="small" color={themeType==='light' ? grey[800] :"primary"}/>
                                         }
                                         </IconButton>
                                     </Tooltip>
@@ -65,15 +79,15 @@ export default function ItemCard({type,item,handleDelete,handleEdit, handleSave}
                                 <Grid item className={classes.actionItem} >
                                     <Tooltip title="Edit">
                                         <IconButton size="small" onClick={()=>handleEdit(item)}>
-                                            <EditIcon fontSize="small"/>
+                                            <EditIcon fontSize="small" color={themeType==='light' ? grey[800] :"primary"}/>
                                         </IconButton>
                                     </Tooltip>
                                 </Grid>
                             }
                             <Grid item className={classes.actionItem} >
-                                <Tooltip title="Delete">
+                                <Tooltip title={type==='trash' ? "Delete Permanently" : "Delete"}>
                                     <IconButton size="small" onClick={()=>handleDelete(item)}>
-                                        <DeleteOutlined fontSize="small"/>
+                                        <DeleteOutlined fontSize="small" color={themeType==='light' ? grey[800] :"primary"}/>
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
@@ -81,12 +95,12 @@ export default function ItemCard({type,item,handleDelete,handleEdit, handleSave}
                         </Grid>
                     }
                     title={item.title}
-                    subheader={constants.categories[item.category].title}
+                    subheader={<Typography variant="caption" className={classes.details}>{constants.categories[item.category].title}</Typography>}
                 />
                 {
                     
                     item.deadline &&
-                    <Container className={classes.dueDate}>
+                    <Container>
                         <Typography variant="caption" >
                                 {
                                     item.category==='Todos' ? 'Deadline' : 'Due'
@@ -101,8 +115,10 @@ export default function ItemCard({type,item,handleDelete,handleEdit, handleSave}
                 }
                 <CardContent>
                     <Typography 
-                        color="textSecondary"
-                        variant="body2">
+                        // color="textSecondary"
+                        variant="body2"
+                        className={classes.dueDate}    
+                    >
                         {item.details}
                     </Typography>
                 </CardContent>

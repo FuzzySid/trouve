@@ -12,18 +12,24 @@ import { FilterCategory } from '../filter/FilterCategory';
 import { SortItems } from '../sorting/SortItems';
 import SearchItem from '../search/SearchItem';
 import constants from '../../constants/constants';
+import { grey } from '@material-ui/core/colors';
+import { useTrouveTheme } from '../../context/themecontext/Theme';
 
 const useStyles=makeStyles((theme,matches)=>{
     return{
         appbar:{
             //width: matches ? 'calc(100% - 240px)' : '100%'
+            backgroundColor: theme.type==='dark' ? '#333333' : '#f5f5f5',
+            color: theme.type==='dark' ? '#bdbdbd' : '#212121'
+
+
         },
         search:{
             //flexGrow:1,
             flex:0.9,
             display:'flex',
             alignItems:'center',
-            backgroundColor: '#F9F9F9',
+            backgroundColor: theme.type==='dark' ? '#333333' : '#F9F9F9',
             // '&:hover': {
             // backgroundColor: grey[100],
             // },
@@ -55,6 +61,7 @@ const Header=({
     setShowSideDrawer
 })=>{
     const theme = useTheme();
+    const {themeType}=useTrouveTheme()
     const location=useLocation();
     const history=useHistory()
     const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -76,7 +83,7 @@ const Header=({
     return(
         <AppBar elevation={0} className={classes.appbar} style={{width: matches ? 'calc(100% - 240px)' : '100%'}}>
             <Toolbar className={classes.panel}>
-                {!matches &&  <IconButton style={{color: 'rgba(0, 0, 0, 0.87)'}} onClick={handleOpenSideDrawer}><MenuIcon/> </IconButton>}
+                {!matches &&  <IconButton style={{color: 'rgba(0, 0, 0, 0.87)'}} onClick={handleOpenSideDrawer}><MenuIcon color={themeType==='light' ? grey[800] :"primary"}/> </IconButton>}
                 {
                 matches &&
                     <Typography className={classes.date}>
@@ -95,6 +102,7 @@ const Header=({
             </Toolbar>
             {
                 location.pathname!=='/edit' && 
+                location.pathname!=='/create' && 
                 <Toolbar className={classes.panel}>
                     <SortItems 
                         handleSort={callSort} 

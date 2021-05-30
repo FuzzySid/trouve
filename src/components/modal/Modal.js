@@ -2,6 +2,17 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles=makeStyles((theme)=>{
+  return{
+   root:{
+    backgroundColor: theme.type==='dark' ? '#333333' : '#F9F9F9',
+    color: theme.type==='dark' ? '#bdbdbd' : '#212121'
+
+   }
+  }
+})
 
 export default function Modal({open,setOpen,title,children}) {
 
@@ -13,6 +24,8 @@ export default function Modal({open,setOpen,title,children}) {
     setOpen(false);
   };
 
+  const classes=useStyles();
+
   return (
     <div>
 
@@ -21,11 +34,15 @@ export default function Modal({open,setOpen,title,children}) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        
       >
-        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-        <DialogContent>
-          {children}
-        </DialogContent>
+        <div className={classes.root}>
+          <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+          <DialogContent >
+            {children}
+          </DialogContent>
+        </div>
+
       </Dialog>
     </div>
   );

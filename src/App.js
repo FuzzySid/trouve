@@ -13,30 +13,33 @@ import { SnackbarProvider, useSnackbar } from 'notistack';
 import Edit from './pages/Edit/Edit';
 import Saved from './pages/Items/Saved';
 import Trash from './pages/Items/Trash';
+import { TrouveThemeProvider } from './context/themecontext/Theme';
 
-const theme=createMuiTheme({
-  palette:colors,
-  typography:{
-    fontFamily:'Quicksand',
-    fontWeightLight:400,
-    fontWeightRegular:500,
-    fontWeightMedium:600,
-    fontWeightBold:700
-  }
-})
+
 
 function App() {
   const [{user},dispatch]=useStateValue()
-  const [items,setItems]=useState([])
+
+  // const theme=createMuiTheme({
+  //   palette:colors,
+  //   typography:{
+  //     fontFamily:'Quicksand',
+  //     fontWeightLight:400,
+  //     fontWeightRegular:500,
+  //     fontWeightMedium:600,
+  //     fontWeightBold:700
+  //   },
+  //   type: themeType
+  // })
 
   return (
-   <ThemeProvider theme={theme}>
+  //  <ThemeProvider theme={theme}>
+  <TrouveThemeProvider>
      <SnackbarProvider maxSnack={3} anchorOrigin={{horizontal:'right',vertical:'bottom'}} autoHideDuration={2000} >
       <Router>
         {
           user  ? 
           <Switch>
-              
               <Route exact path="/">
                 <Items/>     
               </Route>
@@ -62,8 +65,8 @@ function App() {
           
         </Router>
      </SnackbarProvider>
-
-   </ThemeProvider>
+     </TrouveThemeProvider>
+  //  </ThemeProvider>
    
   );
 }

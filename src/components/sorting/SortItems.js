@@ -8,12 +8,14 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import Radio from '@material-ui/core/Radio';
 import Switch from '@material-ui/core/Switch';
+import { useTrouveTheme } from '../../context/themecontext/Theme';
+import { grey } from '@material-ui/core/colors';
 
 
 
 export const SortItems=({handleSort,sortBy,setSortBy,sortOrder,setSortOrder})=>{
     const [openSortModal,setOpenSortModal]=useState(false);
-   
+    const {themeType}=useTrouveTheme()
 
     const handleChange=(e)=>setSortBy(e.target.value)
 
@@ -25,7 +27,7 @@ export const SortItems=({handleSort,sortBy,setSortBy,sortOrder,setSortOrder})=>{
     return(
     <>
         <Tooltip title="Sort Items" placement="right">
-            <IconButton onClick={()=>setOpenSortModal(true)}><SortIcon/></IconButton>
+            <IconButton onClick={()=>setOpenSortModal(true)}><SortIcon color={themeType==='light' ? grey[800] :"primary"}/></IconButton>
         </Tooltip>
             <Modal
                 open={openSortModal}

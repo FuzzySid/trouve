@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: 400,
     margin: theme.spacing(1),
+    backgroundColor:theme.type==='dark' ? '#424242' : '#FFF' ,
   },
   media: {
     height: 190,

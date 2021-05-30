@@ -70,7 +70,7 @@ export default function NavBar() {
                 endIcon={<GoogleIcon/>}
                 className={classes.btn} 
                 variant="contained" 
-                color="primary"
+                color="info"
                 onClick={()=>googleAuthPopup(dispatch)}
             >
                 Get Started

@@ -10,7 +10,9 @@ const useStyles=makeStyles((theme)=>{
             flex:0.8,
             display:'flex',
             alignItems:'center',
-            backgroundColor: '#F9F9F9',
+            backgroundColor: theme.type ==='dark' ? '#424242' : '#FFF',
+            color: theme.type==='dark' ? '#eeeeee' : '#212121',
+
             // '&:hover': {
             // backgroundColor: grey[100],
             // },
@@ -18,7 +20,11 @@ const useStyles=makeStyles((theme)=>{
         },
         searchIcon:{
             marginLeft:theme.spacing(2),
-            marginRight:theme.spacing(1)
+            marginRight:theme.spacing(1),
+        },
+        input:{
+            color: theme.type==='dark' ? '#eeeeee' : '#212121'
+
         }
     }
 
@@ -38,10 +44,7 @@ const SearchItem=({handleSearch})=>{
         <InputBase
             placeholder="Search items by title..."
             fullWidth
-            classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-            }}
+            className={classes.input}
             onChange={handleChange}
             inputProps={{ 'aria-label': 'search' }}
         />
