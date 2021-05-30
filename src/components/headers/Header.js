@@ -94,7 +94,7 @@ const Header=({
 
             </Toolbar>
             {
-                (location.pathname==='/' || location.pathname==='/saved' ) && 
+                location.pathname!=='/edit' && 
                 <Toolbar className={classes.panel}>
                     <SortItems 
                         handleSort={callSort} 

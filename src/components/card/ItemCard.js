@@ -33,7 +33,7 @@ const useStyles=makeStyles({
     }
 })
 
-export default function ItemCard({item,handleDelete,handleEdit, handleSave}){
+export default function ItemCard({type,item,handleDelete,handleEdit, handleSave}){
     const classes=useStyles(item)
     return(
         <div>
@@ -46,25 +46,30 @@ export default function ItemCard({item,handleDelete,handleEdit, handleSave}){
                     }
                     action={
                         <Grid container className={classes.action}>
-                             <Grid item className={classes.actionItem} >
-                                <Tooltip title={item.isSaved ? "Unsave" : "Save"}>
-                                    <IconButton size="small" onClick={()=>handleSave(item, !item.isSaved)}>
-                                      {
-                                        item.isSaved ?
-                                        <BookmarkIcon fontSize="small" />
-                                        :
-                                        <BookmarkBorderIcon fontSize="small"/>
-                                      }
-                                    </IconButton>
-                                </Tooltip>
-                            </Grid>
-                            <Grid item className={classes.actionItem} >
-                                <Tooltip title="Edit">
-                                    <IconButton size="small" onClick={()=>handleEdit(item)}>
-                                        <EditIcon fontSize="small"/>
-                                    </IconButton>
-                                </Tooltip>
-                            </Grid>
+                            { type!=='trash' &&
+                                <Grid item className={classes.actionItem} >
+                                    <Tooltip title={item.isSaved ? "Unsave" : "Save"}>
+                                        <IconButton size="small" onClick={()=>handleSave(item, !item.isSaved)}>
+                                        {
+                                            item.isSaved ?
+                                            <BookmarkIcon fontSize="small" />
+                                            :
+                                            <BookmarkBorderIcon fontSize="small"/>
+                                        }
+                                        </IconButton>
+                                    </Tooltip>
+                                </Grid>
+                            }
+                            {
+                            type!=='trash' && 
+                                <Grid item className={classes.actionItem} >
+                                    <Tooltip title="Edit">
+                                        <IconButton size="small" onClick={()=>handleEdit(item)}>
+                                            <EditIcon fontSize="small"/>
+                                        </IconButton>
+                                    </Tooltip>
+                                </Grid>
+                            }
                             <Grid item className={classes.actionItem} >
                                 <Tooltip title="Delete">
                                     <IconButton size="small" onClick={()=>handleDelete(item)}>

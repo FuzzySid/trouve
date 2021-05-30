@@ -79,6 +79,16 @@ const SideDrawer=({showSideDrawer, setShowSideDrawer})=>{
             icon: <AddCircleOutline color="secondary"/>,
             path:'/create'
         },
+        {
+            text:`Saved`,
+            icon: <Avatar className={classes.avatar,classes.saved}><BookmarkIcon fontSize="small"/></Avatar>,
+            path:'/saved'
+        },
+        {
+            text:`Trash`,
+            icon: <Avatar className={classes.avatar,classes.trash}><DeleteIcon fontSize="small"/></Avatar>,
+            path:'/trash'
+        },
        
     ]
     const drawerCategory=[
@@ -94,15 +104,7 @@ const SideDrawer=({showSideDrawer, setShowSideDrawer})=>{
             text:`Todo's`,
             icon: <Avatar className={classes.avatar,classes.todos}>{constants.categories['Todos'].icon}</Avatar>
         },
-        {
-            text:`Saved`,
-            icon: <Avatar className={classes.avatar,classes.saved}><BookmarkIcon fontSize="small"/></Avatar>,
-            path:'/saved'
-        },
-        {
-            text:`Trash`,
-            icon: <Avatar className={classes.avatar,classes.trash}><DeleteIcon fontSize="small"/></Avatar>
-        },
+      
 
 
     ]

@@ -19,7 +19,7 @@ const Items=({type="items"})=>{
 
 
     const handleDelete=async(item)=>{
-        const response=await addToTrash(user.uid,item)
+        const response= type==='trash' ? await deleteItem(user.uid,item.id,'trash') : await addToTrash(user.uid,item)
         setItems(items.filter(_item=>_item.id!==item.id))
         enqueueSnackbar('This item has been deleted successfully!', { variant:'success' });
     }
@@ -91,12 +91,12 @@ const Items=({type="items"})=>{
                         searchedItems ? 
                         searchedItems.map(item=>                
                             <div key={item.id} >
-                                <ItemCard item={item} handleSave={handleSave} handleDelete={handleDelete} handleEdit={handleEdit}/>
+                                <ItemCard type={type} item={item} handleSave={handleSave} handleDelete={handleDelete} handleEdit={handleEdit}/>
                             </div>)
                         :
                         items.map(item=>                
                         <div key={item.id} >
-                            <ItemCard item={item} handleSave={handleSave} handleDelete={handleDelete} handleEdit={handleEdit}/>
+                            <ItemCard type={type} item={item} handleSave={handleSave} handleDelete={handleDelete} handleEdit={handleEdit}/>
                         </div>)
                     
                 }

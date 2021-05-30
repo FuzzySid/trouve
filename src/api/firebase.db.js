@@ -28,7 +28,8 @@ export const editItem=async(userid,item)=>{
 export const saveItem=async(userid,item)=>{
     const collectionRef=await db.collection('items').doc(item.id)
     const response=await collectionRef.update({
-        isSaved: true
+        isSaved: true,
+        savedontimestamp:firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(() => {
         console.log("Document successfully updated!");
@@ -51,7 +52,8 @@ export const saveItem=async(userid,item)=>{
 export const unsaveItem=async(userid,item)=>{
     const collectionRef=await db.collection('items').doc(item.id)
     const response=await collectionRef.update({
-        isSaved: false
+        isSaved: false,
+        unsavedontimestamp:firebase.firestore.FieldValue.serverTimestamp(),
     })
     .then(() => {
         console.log("Document successfully updated!");
