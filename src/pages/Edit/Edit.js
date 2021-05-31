@@ -47,7 +47,7 @@ const Edit=()=>{
             setStatus('loading')
             let itemObject={
                 ...item,
-                isSaved:itemData.isSaved,
+                isSaved:!!itemData.isSaved,
                 userid:user.uid,
                 id:itemData.id,
                 timestamp:itemData.timestamp,
