@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Trouve
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Trouve Landing Page](https://ik.imagekit.io/pibjyepn7p9/Trouve_Landing_Page_LYETx-Qf9.PNG)
 
-## Available Scripts
+Most Todo list projects are boring and deemed unnecessary, but that's only because developers focus on CRUD operations, neglecting all UI/UX aspects of the project. Cliché Todo list projects can be made effective if developers actually use it and make it tailored fit for their needs. That's what I did with Trouve!
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Trouve Homepage Light Theme](https://ik.imagekit.io/pibjyepn7p9/Trouve_Masonry_Grid__Light__j0rIA1_8F.PNG)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Trouve is French for 'to find'. The correct pronunciation to the best of my knowledge is through-way. It's a personal productivity tool where you can find all the missing pieces of your life. Got a new place to eat? Hold on to that thought, you might forget it! With trouve, you can add these forgettable things that come to your mind and later reference it so you don't miss out on what you planned for!
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Trouve Create Item Page Light](https://ik.imagekit.io/pibjyepn7p9/Trouve_Create_Item_Page__Light__jEGdkWq4B.PNG)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Trouve let's you add items, categorize them, delete items, save items, search them by their title, add deadlines to your todos and sort them by deadline etc. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Trouve Filter](https://ik.imagekit.io/pibjyepn7p9/Filters_Trouve_wSAoz8hmo.PNG)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+![Trouve Sort](https://ik.imagekit.io/pibjyepn7p9/Sorting_Trouve_eL5dXLTw8n.PNG)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+As of now it's tailored fit for my needs and I have been using Trouve since May 15th 2021, regularly! Oh also, did I mention it has a dark mode too?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![Trouve Homepage Dark Theme](https://ik.imagekit.io/pibjyepn7p9/Trouve_Masonry_Grid__Dark__aVAXJwVZe.PNG)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This is something I cannot not brag about - Trouve is a Progressive Web App! Spoiler Alert - Some common PWA features are still missing from it, but I'm constantly working on it to make it more amazing than ever! PWA is a web application that works and looks a lot like mobile applications. In layman's terms, when you first open Trouve on your phone, you'll get an option to 'Add it to your Home Screen' . Once you do that, Trouve will appear like a native mobile application on your phone whilst still being a web app. 
