@@ -8,8 +8,9 @@ import { SnackbarProvider, useSnackbar } from 'notistack';
 import Layout from '../../components/layout/Layout';
 import { useHistory } from 'react-router';
 import SkeletonCard from '../../components/loaders/skeletons/SkeletonCard';
+import {createNotification} from '../../services/notifications';
 
-const Items=({type="items"})=>{
+const Items=({type="items",token})=>{
     const history=useHistory();
     const [loading,setLoading]=useState(true);
     const { enqueueSnackbar } = useSnackbar();
@@ -74,10 +75,18 @@ const Items=({type="items"})=>{
         700:1
     }
 
+    const notifReq=()=>{
+        createNotification(token,{
+            title:'Test',
+            description:'This is a test notification'
+        })
+    }
+
     return(
         <Layout handleSort={handleSortAndFilter} handleSearch={handleSearch}>
             <Container>
                 <div style={{height:80}}></div>
+                <button onClick={notifReq}>Send request</button>
                 
                     <Masonry
                     breakpointCols={breakpoints}

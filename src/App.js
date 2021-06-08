@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import Items from './pages/Items/Items';
 import Create from './pages/Create/Create';
@@ -14,26 +14,27 @@ import Edit from './pages/Edit/Edit';
 import Saved from './pages/Items/Saved';
 import Trash from './pages/Items/Trash';
 import { TrouveThemeProvider } from './context/themecontext/Theme';
+import { getToken, onMessageListener } from './firebase.config';
+
 
 
 
 function App() {
   const [{user},dispatch]=useStateValue()
+  const [token,setToken]=useState()
 
-  // const theme=createMuiTheme({
-  //   palette:colors,
-  //   typography:{
-  //     fontFamily:'Quicksand',
-  //     fontWeightLight:400,
-  //     fontWeightRegular:500,
-  //     fontWeightMedium:600,
-  //     fontWeightBold:700
-  //   },
-  //   type: themeType
-  // })
-
+  useEffect(()=>{
+    getToken(setToken)
+    onMessageListener().then(payload => {
+      console.log('got->',payload);
+      Notification.requestPermission().then(function(result) {
+        console.log(result);
+        //var notification = new Notification('To do list', { body: 'Hey! This is a sample test notification', icon:'https://trouve-e9737.web.app/static/media/trouve-logo.3a36df1c.png' });
+      });
+    }).catch(err => console.log('failed: ', err));
+  },[])
+ 
   return (
-  //  <ThemeProvider theme={theme}>
   <TrouveThemeProvider>
      <SnackbarProvider maxSnack={3} anchorOrigin={{horizontal:'right',vertical:'bottom'}} autoHideDuration={2000} >
       <Router>
@@ -41,7 +42,7 @@ function App() {
           user  ? 
           <Switch>
               <Route exact path="/">
-                <Items/>     
+                <Items token={token}/>     
               </Route>
               <Route path="/create">
                 <Layout><Create/></Layout> 
@@ -66,7 +67,6 @@ function App() {
         </Router>
      </SnackbarProvider>
      </TrouveThemeProvider>
-  //  </ThemeProvider>
    
   );
 }
